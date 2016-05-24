@@ -20,12 +20,13 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.sdust.zhihudaily.Constants;
 import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.data.source.local.db.CacheDao;
+import com.sdust.zhihudaily.welcome.WelcomeFragment;
 
 import java.io.File;
 
 
 public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
-    private static final String TAG = StartFragment.class.getSimpleName();
+    private static final String TAG = WelcomeFragment.class.getSimpleName();
     private static final String PREF_VERSION = "pref_version";
     private static final String PREF_ABOUT_ME = "pref_about";
     private static final String PREF_CLEAR_CACHE = "pref_clear_cache";

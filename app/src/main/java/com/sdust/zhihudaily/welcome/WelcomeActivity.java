@@ -1,4 +1,4 @@
-package com.sdust.zhihudaily.activity;
+package com.sdust.zhihudaily.welcome;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -9,15 +9,14 @@ import android.view.View;
 import android.view.animation.Animation;
 
 import com.sdust.zhihudaily.R;
-import com.sdust.zhihudaily.fragment.StartFragment;
 import com.sdust.zhihudaily.util.IntentUtils;
 
 /**
- * GuiderActivity
+ * WelcomeActivity
  */
-public class GuiderActivity extends Activity {
+public class WelcomeActivity extends Activity {
 
-    private StartFragment mStartFragment;
+    private WelcomeFragment mWelcomeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,18 +29,19 @@ public class GuiderActivity extends Activity {
     private void start() {
         FragmentManager fragmentManager = getFragmentManager();
         //屏幕旋转会导致Activity发生重新启动,Fragment会覆盖
-        if (fragmentManager.findFragmentByTag(StartFragment.TAG) == null) {
-            mStartFragment = new StartFragment();
+        if (fragmentManager.findFragmentByTag(WelcomeFragment.TAG) == null) {
+            mWelcomeFragment = new WelcomeFragment();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.add(R.id.container, mStartFragment, StartFragment.TAG);
+            transaction.add(R.id.container, mWelcomeFragment, WelcomeFragment.TAG);
             transaction.commit();
         }
+        new WelcomePresenter(mWelcomeFragment);
     }
 
     private Animation.AnimationListener mAnimationListener = new AnimationEndListener() {
         @Override
         public void onAnimationEnd(Animation animation) {
-            mStartFragment.getStartImg().setVisibility(View.GONE);
+            mWelcomeFragment.getStartImg().setVisibility(View.GONE);
             intentToMainActivity();
         }
     };
@@ -49,8 +49,8 @@ public class GuiderActivity extends Activity {
     @Override
     public void onAttachFragment(Fragment fragment) {
         super.onAttachFragment(fragment);
-        if (mStartFragment != null) {
-            mStartFragment.getStartAnim().setAnimationListener(
+        if (mWelcomeFragment != null) {
+            mWelcomeFragment.getStartAnim().setAnimationListener(
                     mAnimationListener);
         }
 

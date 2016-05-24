@@ -1,5 +1,5 @@
 
-package com.sdust.zhihudaily.activity;
+package com.sdust.zhihudaily.mainpage;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,10 +21,10 @@ import com.sdust.zhihudaily.fragment.ThemeStoriesFragment;
 import com.sdust.zhihudaily.interfaces.NavigationDrawerCallbacks;
 
 /**
- * Created by Kevin on 2015/7/5.
+ * Created by Kevin on 2016/5/25.
  * MainActivity
  */
-public class NavigationDrawerActivity extends BaseAppCompatActivity implements NavigationDrawerCallbacks {
+public class MainActivity extends BaseAppCompatActivity implements NavigationDrawerCallbacks {
     private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
     private NavigationFragment mNavigationFragment;

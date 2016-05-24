@@ -9,7 +9,7 @@ import android.view.MenuItem;
 
 import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.activity.CollectedActivity;
-import com.sdust.zhihudaily.activity.NavigationDrawerActivity;
+import com.sdust.zhihudaily.mainpage.MainActivity;
 import com.sdust.zhihudaily.activity.SettingsActivity;
 
 /**
@@ -36,7 +36,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     private void setupActionBar() {
         setSupportActionBar(mActionBarToolbar);
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null && !(this instanceof NavigationDrawerActivity)) {
+        if (actionBar != null && !(this instanceof MainActivity)) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }

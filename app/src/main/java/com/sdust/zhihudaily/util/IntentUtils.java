@@ -5,7 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.sdust.zhihudaily.R;
-import com.sdust.zhihudaily.activity.NavigationDrawerActivity;
+import com.sdust.zhihudaily.mainpage.MainActivity;
 import com.sdust.zhihudaily.activity.StoryActivity;
 import com.sdust.zhihudaily.data.model.Story;
 
@@ -18,7 +18,7 @@ public class IntentUtils {
 
 
 	public static void intentToMainActivity(Activity activity) {
-		Intent intent = new Intent(activity,NavigationDrawerActivity.class);
+		Intent intent = new Intent(activity,MainActivity.class);
 		activity.startActivity(intent);
 		activity.finish();
 		activity.overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);

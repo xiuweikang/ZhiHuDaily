@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.sdust.zhihudaily.R;
-import com.sdust.zhihudaily.activity.NavigationDrawerActivity;
+import com.sdust.zhihudaily.mainpage.MainActivity;
 import com.sdust.zhihudaily.fragment.NavigationFragment;
 import com.sdust.zhihudaily.data.model.Story;
 import com.sdust.zhihudaily.util.IntentUtils;
@@ -59,7 +59,7 @@ public class StoryViewHolder extends RecyclerView.ViewHolder implements View.OnC
         if (v.getId() == R.id.card) {
             IntentUtils.intentToStoryActivity((Activity) v.getContext(), mStory);
         } else if (v.getId() == R.id.theme) {
-            final NavigationFragment navigationFragment = (NavigationFragment) ((NavigationDrawerActivity) itemView.getContext()).getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+            final NavigationFragment navigationFragment = (NavigationFragment) ((MainActivity) itemView.getContext()).getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
             if (navigationFragment != null && navigationFragment.isAdded()) {
                 navigationFragment.openDrawer();
                 v.postDelayed(new Runnable() {

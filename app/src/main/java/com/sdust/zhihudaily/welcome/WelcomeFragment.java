@@ -1,7 +1,8 @@
-package com.sdust.zhihudaily.fragment;
+package com.sdust.zhihudaily.welcome;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,47 +12,39 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.sdust.zhihudaily.R;
-import com.sdust.zhihudaily.ZhiHuApplication;
 import com.sdust.zhihudaily.data.model.StartImage;
-import com.sdust.zhihudaily.data.source.Repository;
-import com.sdust.zhihudaily.util.LogUtils;
+import com.sdust.zhihudaily.util.ImageLoaderUtils;
 import com.sdust.zhihudaily.util.SystemUtils;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class StartFragment extends Fragment {
+public class WelcomeFragment extends Fragment implements WelcomeContract.View {
     @InjectView(R.id.tv_author)
     TextView mAuthorView;
 
     @InjectView(R.id.img_start)
     ImageView mStartImg;
 
-    private int mHeight;
-    private int mWidth;
     private Animation mStartAnim;
 
-    private DisplayImageOptions mOptions;
+    private WelcomeContract.Presenter mPresenter;
 
-    public static final String TAG = StartFragment.class.getSimpleName();
+    private Context mContext;
+    public static final String TAG = WelcomeFragment.class.getSimpleName();
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mStartAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.start);
-        mWidth = SystemUtils.getScreenWidth(activity);
-        mHeight = SystemUtils.getScreenHeight(activity);
+        mContext = activity;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mOptions = new DisplayImageOptions.Builder().cacheInMemory(false)
-                .cacheOnDisk(true).considerExifParams(true).build();
     }
 
     @Override
@@ -63,42 +56,27 @@ public class StartFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.inject(this,view);
+        ButterKnife.inject(this, view);
         mStartImg.startAnimation(mStartAnim);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        loadImage();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.start();
+    }
+
     @Override
     public void onDetach() {
         super.onDetach();
         mStartAnim = null;
     }
-    private void loadImage() {
-        ZhiHuApplication.getRepository().getStartImage(mWidth, mHeight,
-                mOptions, new Repository.Callback<StartImage>() {
 
-                    @Override
-                    public void success(StartImage image,boolean outDate) {
-                        mAuthorView.setText(image.getText());
-
-                        ImageLoader.getInstance().displayImage(image.getImg(),
-                                mStartImg, mOptions);
-                    }
-
-                    @Override
-                    public void failure(Exception e) {
-                        LogUtils.i(TAG, "default image.");
-                        mStartImg.setBackgroundResource(R.drawable.bg_splash);
-                        mAuthorView.setText("Kevin");
-                        e.printStackTrace();
-                    }
-                });
-
-    }
 
     public Animation getStartAnim() {
         return mStartAnim;
@@ -107,4 +85,34 @@ public class StartFragment extends Fragment {
     public ImageView getStartImg() {
         return mStartImg;
     }
+
+    @Override
+    public void setPresenter(WelcomeContract.Presenter presenter) {
+        mPresenter = presenter;
+    }
+
+    @Override
+    public int getWidth() {
+        return SystemUtils.getScreenWidth(mContext);
+    }
+
+    @Override
+    public int getHeight() {
+        return SystemUtils.getScreenWidth(mContext);
+
+    }
+
+    @Override
+    public void showSuccessImage(StartImage image) {
+        mAuthorView.setText(image.getText());
+        ImageLoader.getInstance().displayImage(image.getImg(),
+                mStartImg, ImageLoaderUtils.getImageOptions());
+    }
+
+    @Override
+    public void showFailureImage() {
+        mStartImg.setBackgroundResource(R.drawable.bg_splash);
+        mAuthorView.setText("Kevin");
+    }
+
 }
