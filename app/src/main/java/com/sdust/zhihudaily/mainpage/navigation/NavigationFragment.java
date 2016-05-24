@@ -1,4 +1,4 @@
-package com.sdust.zhihudaily.fragment;
+package com.sdust.zhihudaily.mainpage.navigation;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -14,22 +14,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sdust.zhihudaily.R;
-import com.sdust.zhihudaily.ZhiHuApplication;
 import com.sdust.zhihudaily.adapter.NavigationDrawerAdapter;
-import com.sdust.zhihudaily.interfaces.NavigationDrawerCallbacks;
 import com.sdust.zhihudaily.data.model.Theme;
 import com.sdust.zhihudaily.data.model.Themes;
-import com.sdust.zhihudaily.data.source.Repository;
+import com.sdust.zhihudaily.interfaces.NavigationDrawerCallbacks;
 
 import java.util.List;
 
 
-public class NavigationFragment extends Fragment implements NavigationDrawerCallbacks {
+public class NavigationFragment extends Fragment implements NavigationDrawerCallbacks, NavigationContract.View{
     public static final String TAG = NavigationFragment.class.getSimpleName();
 
 
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
 
+    private NavigationContract.Presenter mPresenter;
 
     /**
      * 指向NavigationActivity的引用
@@ -98,9 +97,8 @@ public class NavigationFragment extends Fragment implements NavigationDrawerCall
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-        refresh();
+        mPresenter.start();
     }
-
 
     public boolean isDrawerOpen() {
         return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mNavigationFragment);
@@ -173,21 +171,6 @@ public class NavigationFragment extends Fragment implements NavigationDrawerCall
         mCallbacks = null;
     }
 
-    private void refresh() {
-
-        ZhiHuApplication.getRepository().getThemes(new Repository.Callback<Themes>() {
-            @Override
-            public void success(Themes themes, boolean outDate) {
-                mThemes = themes.getOthers();
-                mDrawerAdapter.setThemes(mThemes);
-            }
-
-            @Override
-            public void failure(Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
 
     public String getTitle(int sectionNumber) {
         return sectionNumber == 0 ? getString(R.string.title_activity_main) : mThemes.get(sectionNumber - 1).getName();
@@ -224,4 +207,14 @@ public class NavigationFragment extends Fragment implements NavigationDrawerCall
         mDrawerAdapter.selectPosition(position);
     }
 
+    @Override
+    public void setPresenter(NavigationContract.Presenter presenter) {
+        mPresenter = presenter;
+    }
+
+    @Override
+    public void showThemes(Themes themes) {
+        mThemes = themes.getOthers();
+        mDrawerAdapter.setThemes(mThemes);
+    }
 }

@@ -14,7 +14,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.mainpage.MainActivity;
-import com.sdust.zhihudaily.fragment.NavigationFragment;
+import com.sdust.zhihudaily.mainpage.navigation.NavigationFragment;
 import com.sdust.zhihudaily.data.model.Story;
 import com.sdust.zhihudaily.util.IntentUtils;
 

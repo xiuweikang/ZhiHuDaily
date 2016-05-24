@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/fragment_navigation_drawer"
-        android:name="com.sdust.zhihudaily.fragment.NavigationFragment"
+        android:name="com.sdust.zhihudaily.mainpage.navigation.NavigationFragment"
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"/>

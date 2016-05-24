@@ -16,9 +16,10 @@ import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.base.BaseAppCompatActivity;
 import com.sdust.zhihudaily.fragment.BaseFragment;
 import com.sdust.zhihudaily.fragment.DailyStoriesFragment;
-import com.sdust.zhihudaily.fragment.NavigationFragment;
+import com.sdust.zhihudaily.mainpage.navigation.NavigationFragment;
 import com.sdust.zhihudaily.fragment.ThemeStoriesFragment;
 import com.sdust.zhihudaily.interfaces.NavigationDrawerCallbacks;
+import com.sdust.zhihudaily.mainpage.navigation.NavigationPresenter;
 
 /**
  * Created by Kevin on 2016/5/25.
@@ -48,6 +49,7 @@ public class MainActivity extends BaseAppCompatActivity implements NavigationDra
     private void setUpDrawer() {
         mNavigationFragment = (NavigationFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         mNavigationFragment.setup(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mActionBarToolbar);
+        new NavigationPresenter(mNavigationFragment);
         mTitle = getTitle();
 
     }
