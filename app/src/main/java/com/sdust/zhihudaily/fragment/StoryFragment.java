@@ -25,7 +25,7 @@ import android.widget.Toast;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.ZhiHuApplication;
-import com.sdust.zhihudaily.db.CollectedDao;
+import com.sdust.zhihudaily.data.source.local.db.CollectedDao;
 import com.sdust.zhihudaily.data.model.Editor;
 import com.sdust.zhihudaily.data.model.Story;
 import com.sdust.zhihudaily.data.source.Repository;

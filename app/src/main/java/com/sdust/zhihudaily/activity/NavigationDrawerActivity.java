@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.widget.Toast;
 
 import com.sdust.zhihudaily.R;
+import com.sdust.zhihudaily.base.BaseAppCompatActivity;
 import com.sdust.zhihudaily.fragment.BaseFragment;
 import com.sdust.zhihudaily.fragment.DailyStoriesFragment;
 import com.sdust.zhihudaily.fragment.NavigationFragment;
@@ -124,4 +125,5 @@ public class NavigationDrawerActivity extends BaseAppCompatActivity implements N
                 return ThemeStoriesFragment.TAG + position;
         }
     }
+
 }

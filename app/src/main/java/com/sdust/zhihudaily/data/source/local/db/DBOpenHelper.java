@@ -1,4 +1,4 @@
-package com.sdust.zhihudaily.db;
+package com.sdust.zhihudaily.data.source.local.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

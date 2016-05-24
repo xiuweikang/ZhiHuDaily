@@ -1,4 +1,4 @@
-package com.sdust.zhihudaily.activity;
+package com.sdust.zhihudaily.base;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.sdust.zhihudaily.R;
+import com.sdust.zhihudaily.activity.CollectedActivity;
+import com.sdust.zhihudaily.activity.NavigationDrawerActivity;
+import com.sdust.zhihudaily.activity.SettingsActivity;
 
 /**
  * Created by Kevin on 2015/7/15.

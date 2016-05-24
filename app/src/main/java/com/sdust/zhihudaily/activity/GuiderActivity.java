@@ -11,56 +11,76 @@ import android.view.animation.Animation;
 import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.fragment.StartFragment;
 import com.sdust.zhihudaily.util.IntentUtils;
-import com.sdust.zhihudaily.Listener.AnimationEndListener;
 
 /**
  * GuiderActivity
  */
 public class GuiderActivity extends Activity {
 
-	private StartFragment mStartFragment;
+    private StartFragment mStartFragment;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_guider);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_guider);
 
-		start();
-	}
+        start();
+    }
 
-	private void start() {
-		FragmentManager fragmentManager = getFragmentManager();
-		//屏幕旋转会导致Activity发生重新启动,Fragment会覆盖
-		if(fragmentManager.findFragmentByTag(StartFragment.TAG) == null) {
-			mStartFragment = new StartFragment();
-			FragmentTransaction transaction = fragmentManager.beginTransaction();
-			transaction.add(R.id.container, mStartFragment, StartFragment.TAG);
-			transaction.commit();
-		}
-	}
+    private void start() {
+        FragmentManager fragmentManager = getFragmentManager();
+        //屏幕旋转会导致Activity发生重新启动,Fragment会覆盖
+        if (fragmentManager.findFragmentByTag(StartFragment.TAG) == null) {
+            mStartFragment = new StartFragment();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.add(R.id.container, mStartFragment, StartFragment.TAG);
+            transaction.commit();
+        }
+    }
 
-	private Animation.AnimationListener mAnimationListener = new AnimationEndListener() {
-		@Override
-		public void onAnimationEnd(Animation animation) {
-			mStartFragment.getStartImg().setVisibility(View.GONE);
-			intentToMainActivity();
-		}
-	};
+    private Animation.AnimationListener mAnimationListener = new AnimationEndListener() {
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            mStartFragment.getStartImg().setVisibility(View.GONE);
+            intentToMainActivity();
+        }
+    };
 
-	@Override
-	public void onAttachFragment(Fragment fragment) {
-		super.onAttachFragment(fragment);
-		if (mStartFragment != null) {
-			mStartFragment.getStartAnim().setAnimationListener(
-					mAnimationListener);
-		}
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        super.onAttachFragment(fragment);
+        if (mStartFragment != null) {
+            mStartFragment.getStartAnim().setAnimationListener(
+                    mAnimationListener);
+        }
 
-	}
+    }
 
-	private void intentToMainActivity() {
-		IntentUtils.intentToMainActivity(this);
-	}
+    private void intentToMainActivity() {
+        IntentUtils.intentToMainActivity(this);
+    }
 
+    class AnimationEndListener implements Animation.AnimationListener {
 
+        @Override
+        public void onAnimationStart(Animation animation) {
+            // TODO Auto-generated method stub
 
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            // TODO Auto-generated method stub
+
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+            // TODO Auto-generated method stub
+
+        }
+
+    }
 }
+
+

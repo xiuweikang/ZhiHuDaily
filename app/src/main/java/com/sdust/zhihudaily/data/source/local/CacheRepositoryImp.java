@@ -8,7 +8,7 @@ import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
-import com.sdust.zhihudaily.db.CacheDao;
+import com.sdust.zhihudaily.data.source.local.db.CacheDao;
 import com.sdust.zhihudaily.data.model.Cache;
 import com.sdust.zhihudaily.data.model.DailyStories;
 import com.sdust.zhihudaily.data.model.StartImage;

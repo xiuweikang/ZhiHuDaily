@@ -3,6 +3,7 @@ package com.sdust.zhihudaily.activity;
 import android.os.Bundle;
 
 import com.sdust.zhihudaily.R;
+import com.sdust.zhihudaily.base.BaseAppCompatActivity;
 import com.sdust.zhihudaily.fragment.SettingsFragment;
 /**
  * Created by Kevin on 2015/7/25

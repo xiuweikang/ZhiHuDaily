@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.sdust.zhihudaily.R;
+import com.sdust.zhihudaily.base.BaseAppCompatActivity;
 import com.sdust.zhihudaily.fragment.StoryFragment;
 import com.sdust.zhihudaily.util.IntentUtils;
 import com.sdust.zhihudaily.util.LogUtils;
@@ -12,7 +13,7 @@ import com.sdust.zhihudaily.util.LogUtils;
 /**
  * Created by Kevin on 2015/8/8.
  */
-public class StoryActivity extends  BaseAppCompatActivity {
+public class StoryActivity extends BaseAppCompatActivity {
     @Override
     protected int getContentViewLayoutId() {
         return  R.layout.activity_story;

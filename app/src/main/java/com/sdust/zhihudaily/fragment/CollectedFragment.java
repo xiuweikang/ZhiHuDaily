@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.adapter.CollectedAdapter;
-import com.sdust.zhihudaily.db.CollectedDao;
+import com.sdust.zhihudaily.data.source.local.db.CollectedDao;
 import com.sdust.zhihudaily.data.model.Story;
 import com.sdust.zhihudaily.widget.LoadMoreRecyclerView;
 

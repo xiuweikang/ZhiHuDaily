@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.sdust.zhihudaily.Constants;
 import com.sdust.zhihudaily.R;
-import com.sdust.zhihudaily.db.CacheDao;
+import com.sdust.zhihudaily.data.source.local.db.CacheDao;
 
 import java.io.File;
 
