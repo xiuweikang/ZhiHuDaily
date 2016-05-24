@@ -1,0 +1,22 @@
+<resources>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_night">夜间模式</string>
+    <string name="pref_night_summary">切换为夜间模式</string>
+
+    <string name="pref_title">偏好设置</string>
+
+    <string name="pref_no_photo">无图模式</string>
+
+    <string name="pref_no_photo_summary">2G/3G网络不显示图片</string>
+
+    <string name="pref_about">关于</string>
+
+    <string name="pref_version">版本信息</string>
+    <string name="pref_about_me">关于我</string>
+ 
+</resources>

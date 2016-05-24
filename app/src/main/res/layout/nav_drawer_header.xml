@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/navigation_drawer_header_hright"
+    android:gravity="center"
+    android:background="@color/style_color_primary_dark">
+
+    <ImageView
+        android:id="@+id/ivHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/start_logo"
+        android:scaleType="centerCrop" />
+</LinearLayout>
