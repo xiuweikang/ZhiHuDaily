@@ -21,7 +21,7 @@ public class SettingsActivity extends BaseAppCompatActivity {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new SetFragment())
+                    .add(R.id.container, new SettingFragment())
                     .commit();
         }
     }

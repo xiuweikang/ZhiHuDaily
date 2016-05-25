@@ -20,7 +20,11 @@ public class SharedPrefUtils {
 		SharedPreferences sp = getDefaultSharedPreferences(context);
 		return sp.getBoolean(SHARED_PREF_NIGHT_MODE,false);
 	}
-	
+
+	public static void setNightMode(Context context,boolean isNight) {
+		SharedPreferences sp = getDefaultSharedPreferences(context);
+		sp.edit().putBoolean(SHARED_PREF_NIGHT_MODE,isNight).commit();
+	}
 	 public static String getStartJson(Context context){
 	        SharedPreferences sp = getDefaultSharedPreferences(context);
 	        return sp.getString(SHARED_PREF_START_JSON, null);

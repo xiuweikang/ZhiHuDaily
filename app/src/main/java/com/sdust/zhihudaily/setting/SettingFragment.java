@@ -1,18 +1,17 @@
 package com.sdust.zhihudaily.setting;
 
-
 import android.app.Dialog;
+import android.app.Fragment;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
+import android.support.annotation.Nullable;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,74 +20,105 @@ import com.sdust.zhihudaily.Constants;
 import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.data.source.local.db.CacheDao;
 import com.sdust.zhihudaily.util.FileUtils;
-import com.sdust.zhihudaily.welcome.WelcomeFragment;
+import com.sdust.zhihudaily.util.LogUtils;
+import com.sdust.zhihudaily.util.SharedPrefUtils;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
+public class SettingFragment extends Fragment {
 
 
-public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
-    private static final String TAG = WelcomeFragment.class.getSimpleName();
-    private static final String PREF_VERSION = "pref_version";
-    private static final String PREF_ABOUT_ME = "pref_about";
-    private static final String PREF_CLEAR_CACHE = "pref_clear_cache";
-
-
-    private Preference clearCachePreference;
-    public SettingsFragment() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.pref_general);
-        findPreference(PREF_VERSION).setOnPreferenceClickListener(this);
-        findPreference(PREF_ABOUT_ME).setOnPreferenceClickListener(this);
-        clearCachePreference = findPreference(PREF_CLEAR_CACHE);
-        clearCachePreference.setSummary(FileUtils.getCacheSize());
-        clearCachePreference.setOnPreferenceClickListener(this);
-
-    }
+    @InjectView(R.id.cbk_night)
+    CheckBox mCbkNight;
+    @InjectView(R.id.txt_cache_size)
+    TextView mTxtCacheSize;
+    @InjectView(R.id.txt_version)
+    TextView mTxtVersion;
+    @InjectView(R.id.txt_about_me)
+    TextView mTxtAboutMe;
+    @InjectView(R.id.txt_clear_cache)
+    TextView mTxtClearCache;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // setHasOptionsMenu(true);
-        // Inflate the layout for this fragment
-
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_setting, container, false);
+        ButterKnife.inject(this, view);
+        return view;
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_story, menu);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.inject(this, view);
+        initView();
     }
 
-    @Override
-    public boolean onPreferenceClick(Preference preference) {
-        if (preference.getKey().equals(PREF_ABOUT_ME)) {
-            showDialog(false);
-        } else if (preference.getKey().equals(PREF_VERSION)) {
-            showDialog(true);
-        } else if (preference.getKey().equals(PREF_CLEAR_CACHE)) {
-            clearCache();
+    private void initView() {
+        mTxtCacheSize.setText(FileUtils.getCacheSize());
+        mTxtClearCache.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearCache();
+            }
+        });
+        mTxtAboutMe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(false);
+            }
+        });
+
+        mTxtVersion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(true);
+            }
+        });
+        boolean isNight = SharedPrefUtils.getIsNiaghtMode(getActivity());
+        if (isNight) {
+            mCbkNight.setChecked(true);
+        } else {
+            mCbkNight.setChecked(false);
         }
-        return false;
+
+
+        mCbkNight.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    LogUtils.d("night","设置夜间模式");
+                    SharedPrefUtils.setNightMode(getActivity(), true);
+                } else {
+                    LogUtils.d("night","取消夜间模式");
+                    SharedPrefUtils.setNightMode(getActivity(), false);
+                }
+            }
+        });
     }
 
     private void clearCache() {
         ImageLoader.getInstance().clearDiskCache();
         ImageLoader.getInstance().clearMemoryCache();
-
         CacheDao dao = new CacheDao(getActivity());
         dao.deleteAllCache();
         Toast.makeText(getActivity(), "缓存已清除", Toast.LENGTH_SHORT).show();
-        clearCachePreference.setSummary(" 0.00K");
+        mTxtCacheSize.setText(" 0.00K");
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
     }
 
     private void showDialog(boolean isVersion) {
         final Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
+
         dialog.setContentView(R.layout.dialog_version);
 
         TextView textView = (TextView) dialog.findViewById(R.id.dialog_text);
@@ -129,6 +159,4 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         textView.setMovementMethod(LinkMovementMethod.getInstance());
         dialog.show();
     }
-
-
 }

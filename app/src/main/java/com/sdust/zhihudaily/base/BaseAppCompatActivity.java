@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.sdust.zhihudaily.R;
@@ -34,6 +35,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     private void setupActionBar() {
         setSupportActionBar(mActionBarToolbar);
         ActionBar actionBar = getSupportActionBar();
+        Log.d("actionbar","setting");
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
