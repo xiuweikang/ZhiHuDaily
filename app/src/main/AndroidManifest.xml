@@ -40,7 +40,6 @@
 
         <activity
             android:name=".setting.SettingsActivity"
-            android:theme="@style/SettingTheme"
             android:label="@string/title_activity_settings"
             android:configChanges="orientation|keyboardHidden|screenSize">
 

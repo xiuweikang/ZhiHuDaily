@@ -1,0 +1,110 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/TextViewBase.title"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/pref_title"
+        />
+
+    <LinearLayout
+        style="@style/LayoutWithPadding"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextViewBase.Main"
+                android:text="@string/pref_night"
+                />
+
+            <TextView
+                style="@style/TextViewBase.Info"
+                android:layout_marginTop="4dp"
+                android:text="@string/pref_night_summary"
+                />
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/cbk_night"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <View
+        style="@style/divider"
+        />
+    <LinearLayout
+        style="@style/LayoutWithPadding"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextViewBase.Main"
+                android:text="@string/pref_no_photo"
+                />
+
+            <TextView
+                style="@style/TextViewBase.Info"
+                android:layout_marginTop="4dp"
+                android:text="@string/pref_no_photo_summary"
+                />
+        </LinearLayout>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <View
+        style="@style/divider"
+        />
+    <TextView
+        android:id="@+id/txt_clear_cache"
+        style="@style/TextViewBase.Main"
+        android:layout_marginLeft="20dp"
+        android:text="@string/pref_clear_cache"
+        />
+    <TextView
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/txt_cache_size"
+        style="@style/TextViewBase.Info"/>
+
+    <TextView
+        style="@style/TextViewBase.title"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/pref_about"
+        />
+    <TextView
+        style="@style/TextViewBase.Main"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/txt_version"
+        android:text="@string/pref_version"
+        />
+    <TextView
+        android:id="@+id/txt_about_me"
+        style="@style/TextViewBase.Main"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/pref_about_me"
+        />
+
+
+</LinearLayout>

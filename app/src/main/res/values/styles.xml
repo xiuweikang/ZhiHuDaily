@@ -17,18 +17,6 @@
 
     </style>
 
-    <style name="SettingTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-        <item name="colorPrimary">@color/style_color_primary</item>
-        <item name="colorPrimaryDark">@color/style_color_primary_dark</item>
-        <item name="colorAccent">@color/style_color_accent</item>
-        <item name="android:windowBackground">@color/style_window_background</item>
-        <item name="android:divider">@color/style_divider</item>
-        <item name="android:textColorPrimary">@color/style_text_color_primary</item>
-        <item name="android:textColorSecondary">@color/style_text_color_secondary</item>
-
-    </style>
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
         <item name="color">@android:color/white</item>
@@ -39,5 +27,40 @@
         <item name="android:windowBackground">@android:color/black</item>
     </style>
 
+    <style name="LayoutWithPadding">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+    </style>
+    <style name="TextViewBase">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="TextViewBase.title">
+        <item name="android:textColor">@color/setting_color_accent</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+    
+    <style name="TextViewBase.Main">
+        <item name="android:textColor">@color/setting_text_color_primary</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="TextViewBase.Info">
+        <item name="android:textColor">@color/setting_text_color_secondary</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+
+    <style name="divider">
+        <item name="android:layout_marginLeft">6dp</item>
+        <item name="android:layout_marginRight">6dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:color">@color/style_divider</item>
+    </style>
 
 </resources>

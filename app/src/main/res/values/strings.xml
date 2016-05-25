@@ -6,7 +6,7 @@
     <string name="app_version">1.0.0</string>
     <string name="app_author">Kevin Xiu</string>
 
-    <string name="action_settings">设置选项</string>
+    <string name="action_settings">设置</string>
     <string name="action_night_theme">夜间模式</string>
     <string name="action_day_theme">日间模式</string>
     <string name="start_text">Kevin</string>
@@ -16,7 +16,7 @@
     <string name="title_activity_main">首页</string>
     <string name="title_activity_settings">设置</string>
     <string name="title_activity_story">详情页</string>
-    <string name="recycler_item_main_today_hottest">今日热文</string>
+    <string name="recycler_item_main_today_hottest">今日热闻</string>
     <string name="avatar_title_editor">主编</string>
     <string name="recycler_item_main_select_from">选自</string>
     <string name="avatar_title_referee">推荐人</string>
@@ -25,5 +25,23 @@
     <string name="action_collect">收藏</string>
     <string name="title_activity_collected">收藏夹</string>
     <string name="pref_clear_cache">清理缓存</string>
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_night">夜间模式</string>
+    <string name="pref_night_summary">切换为夜间模式</string>
+
+    <string name="pref_title">偏好设置</string>
+
+    <string name="pref_no_photo">无图模式</string>
+
+    <string name="pref_no_photo_summary">2G/3G网络不显示图片</string>
+
+    <string name="pref_about">关于</string>
+
+    <string name="pref_version">版本信息</string>
+    <string name="pref_about_me">关于我</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
