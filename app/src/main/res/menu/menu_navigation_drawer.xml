@@ -1,13 +1,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_theme"
+        android:title="@string/action_day_theme"
+        app:showAsAction="never"
+        />
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never"/>
-    <item android:id="@+id/action_collected"
-          android:title="@string/action_collect"
-          android:orderInCategory="100"
-          android:icon="@drawable/collect"
-          app:showAsAction="always" />
+    <item
+        android:id="@+id/action_collected"
+        android:icon="@drawable/collect"
+        android:orderInCategory="100"
+        android:title="@string/action_collect"
+        app:showAsAction="always"/>
 </menu>
