@@ -1,4 +1,4 @@
-package com.sdust.zhihudaily.fragment;
+package com.sdust.zhihudaily.mainpage.theme;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,10 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.sdust.zhihudaily.R;
-import com.sdust.zhihudaily.ZhiHuApplication;
 import com.sdust.zhihudaily.adapter.ThemeStoriesAdapter;
+import com.sdust.zhihudaily.base.BaseFragment;
 import com.sdust.zhihudaily.data.model.Theme;
-import com.sdust.zhihudaily.data.source.Repository;
 import com.sdust.zhihudaily.util.LogUtils;
 import com.sdust.zhihudaily.widget.LoadMoreRecyclerView;
 
@@ -23,7 +22,7 @@ import butterknife.InjectView;
 /**
  * Created by Kevin on 2015/8/7.
  */
-public class ThemeStoriesFragment extends BaseFragment {
+public class ThemeStoriesFragment extends BaseFragment implements ThemeContract.View{
     public static final  String TAG = ThemeStoriesFragment.class.getSimpleName();
     @InjectView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -37,6 +36,7 @@ public class ThemeStoriesFragment extends BaseFragment {
     private String mLastStoryId;
 
     private boolean isDataLoaded;
+    private ThemeContract.Presenter mPresenter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,15 +61,16 @@ public class ThemeStoriesFragment extends BaseFragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refresh();
+                mPresenter.refresh(mThemeId);
             }
         });
 
         mRecyclerView.setOnLoadMoreListener(new LoadMoreRecyclerView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-
-                loadMore();
+                isDataLoaded = false;
+                mRecyclerView.setLoadingMore(true);
+                mPresenter.loadMore(mThemeId,mLastStoryId);
             }
 
             @Override
@@ -88,59 +89,62 @@ public class ThemeStoriesFragment extends BaseFragment {
             public void run() {
                 if (!isDataLoaded) {
 
-                    refresh();
+                    mPresenter.refresh(mThemeId);
                 }
             }
         });
     }
-    private void refresh() {
-        mSwipeRefreshLayout.setRefreshing(true);
-        ZhiHuApplication.getRepository().getThemeStories(mThemeId, new Repository.Callback<Theme>() {
-            @Override
-            public void success(Theme theme, boolean outDate) {
-                isDataLoaded = true;
-                mSwipeRefreshLayout.setRefreshing(false);
-                if (theme != null && mAdapter != null) {
-                    if (theme.getStories().size() > 0) {
-                        mLastStoryId = theme.getStories().get(theme.getStories().size() - 1).getId();
-                    }
-                    LogUtils.i(TAG, "last story id: " + mLastStoryId);
-                    mAdapter.setTheme(theme);
-                }
-            }
-
-            @Override
-            public void failure(Exception e) {
-                isDataLoaded = false;
-                mSwipeRefreshLayout.setRefreshing(false);
-                Toast.makeText(getActivity(), "刷新错误", Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
-        });
-    }
-
 
     private void loadMore() {
-        isDataLoaded = false;
-        mRecyclerView.setLoadingMore(true);
-        ZhiHuApplication.getRepository().getBeforeThemeStories(mThemeId, mLastStoryId, new Repository.Callback<Theme>() {
-            @Override
-            public void success(Theme theme, boolean outDate) {
-                mRecyclerView.setLoadingMore(false);
-                if (theme != null && mAdapter != null) {
-                    if (theme.getStories().size() > 0) {
-                        mLastStoryId = theme.getStories().get(theme.getStories().size() - 1).getId();
-                        mAdapter.appendStories(theme.getStories());
-                    }
-                }
-            }
 
-            @Override
-            public void failure(Exception e) {
-                mRecyclerView.setLoadingMore(false);
-                Toast.makeText(getActivity(), "加载错误", Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
+
+    }
+
+    @Override
+    public void setPresenter(ThemeContract.Presenter presenter) {
+        mPresenter = presenter;
+    }
+
+    @Override
+    public void showLoadProgress() {
+        mSwipeRefreshLayout.setRefreshing(true);
+    }
+
+    @Override
+    public void setThemeStories(Theme theme) {
+        isDataLoaded = true;
+        mSwipeRefreshLayout.setRefreshing(false);
+        if (theme != null && mAdapter != null) {
+            if (theme.getStories().size() > 0) {
+                mLastStoryId = theme.getStories().get(theme.getStories().size() - 1).getId();
             }
-        });
+            LogUtils.i(TAG, "last story id: " + mLastStoryId);
+            mAdapter.setTheme(theme);
+        }
+    }
+
+    @Override
+    public void showLoadError() {
+        isDataLoaded = false;
+        mSwipeRefreshLayout.setRefreshing(false);
+        Toast.makeText(getActivity(), "刷新错误", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setMore(Theme theme) {
+        mRecyclerView.setLoadingMore(false);
+        if (theme != null && mAdapter != null) {
+            if (theme.getStories().size() > 0) {
+                mLastStoryId = theme.getStories().get(theme.getStories().size() - 1).getId();
+                mAdapter.appendStories(theme.getStories());
+            }
+        }
+    }
+
+
+    @Override
+    public void showLoadMoreError() {
+        mRecyclerView.setLoadingMore(false);
+        Toast.makeText(getActivity(), "加载错误", Toast.LENGTH_SHORT).show();
     }
 }

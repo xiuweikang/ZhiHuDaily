@@ -14,12 +14,14 @@ import android.widget.Toast;
 
 import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.base.BaseAppCompatActivity;
-import com.sdust.zhihudaily.fragment.BaseFragment;
-import com.sdust.zhihudaily.fragment.DailyStoriesFragment;
-import com.sdust.zhihudaily.mainpage.navigation.NavigationFragment;
-import com.sdust.zhihudaily.fragment.ThemeStoriesFragment;
+import com.sdust.zhihudaily.base.BaseFragment;
 import com.sdust.zhihudaily.interfaces.NavigationDrawerCallbacks;
+import com.sdust.zhihudaily.mainpage.daily.DailyPresenter;
+import com.sdust.zhihudaily.mainpage.daily.DailyStoriesFragment;
+import com.sdust.zhihudaily.mainpage.navigation.NavigationFragment;
 import com.sdust.zhihudaily.mainpage.navigation.NavigationPresenter;
+import com.sdust.zhihudaily.mainpage.theme.ThemePresenter;
+import com.sdust.zhihudaily.mainpage.theme.ThemeStoriesFragment;
 
 /**
  * Created by Kevin on 2016/5/25.
@@ -93,7 +95,13 @@ public class MainActivity extends BaseAppCompatActivity implements NavigationDra
     }
 
     private Fragment getFragmentItem(int position) {
-        return BaseFragment.newInstance(position, mNavigationFragment.getSectionId(position));
+        Fragment fragment = BaseFragment.newInstance(position, mNavigationFragment.getSectionId(position));
+        if(fragment instanceof DailyStoriesFragment) {
+            new DailyPresenter((DailyStoriesFragment)fragment);
+        } else {
+            new ThemePresenter((ThemeStoriesFragment)fragment);
+        }
+        return fragment;
     }
 
     // 用来计算返回键的点击间隔时间

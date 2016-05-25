@@ -1,4 +1,4 @@
-package com.sdust.zhihudaily.fragment;
+package com.sdust.zhihudaily.mainpage.daily;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +18,7 @@ import com.sdust.zhihudaily.adapter.DailyStoriesAdapter;
 import com.sdust.zhihudaily.adapter.holder.DateViewHolder;
 import com.sdust.zhihudaily.data.model.DailyStories;
 import com.sdust.zhihudaily.data.source.Repository;
+import com.sdust.zhihudaily.base.BaseFragment;
 import com.sdust.zhihudaily.util.LogUtils;
 import com.sdust.zhihudaily.widget.LoadMoreRecyclerView;
 import com.sdust.zhihudaily.widget.MyViewPager;
@@ -25,7 +26,7 @@ import com.sdust.zhihudaily.widget.MyViewPager;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class DailyStoriesFragment extends BaseFragment {
+public class DailyStoriesFragment extends BaseFragment implements DailyContract.View{
     public static final String TAG = DailyStoriesFragment.class.getSimpleName();
 
     @InjectView(R.id.swipeRefreshLayout)
@@ -38,6 +39,7 @@ public class DailyStoriesFragment extends BaseFragment {
     private LinearLayoutManager mLayoutManager;
     private String mDate;
 
+    private DailyContract.Presenter mPresenter;
     private boolean isDataLoaded;
 
     @Override
@@ -63,7 +65,8 @@ public class DailyStoriesFragment extends BaseFragment {
         mRecyclerView.setOnLoadMoreListener(new LoadMoreRecyclerView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-                loadMore();
+                mRecyclerView.setLoadingMore(true);
+                mPresenter.loadMore(mDate);
             }
 
 
@@ -81,7 +84,7 @@ public class DailyStoriesFragment extends BaseFragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refresh();
+                mPresenter.refresh();
             }
         });
     }
@@ -95,7 +98,7 @@ public class DailyStoriesFragment extends BaseFragment {
             @Override
             public void run() {
                 if (!isDataLoaded) {
-                    refresh();
+                    mPresenter.start();
                 }
             }
         });
@@ -152,30 +155,8 @@ public class DailyStoriesFragment extends BaseFragment {
         }
     }
 
-    private void refresh() {
-        isDataLoaded = false;
-        mSwipeRefreshLayout.setRefreshing(true);
-        ZhiHuApplication.getRepository().getLatestDailyStories(new Repository.Callback<DailyStories>() {
-            @Override
-            public void success(DailyStories dailyStories, boolean outDate) {
-                isDataLoaded = true;
-                mSwipeRefreshLayout.setRefreshing(false);
-                mDate = dailyStories.getDate();
-                mAdapter.setList(dailyStories);
-            }
-
-            @Override
-            public void failure(Exception e) {
-                isDataLoaded = false;
-                mSwipeRefreshLayout.setRefreshing(false);
-                Toast.makeText(getActivity(), "刷新失败", Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
-        });
-    }
 
     private void loadMore() {
-        mRecyclerView.setLoadingMore(true);
 
         ZhiHuApplication.getRepository().getBeforeDailyStories(mDate, new Repository.Callback<DailyStories>() {
             @Override
@@ -198,5 +179,49 @@ public class DailyStoriesFragment extends BaseFragment {
             }
         });
     }
+
+    @Override
+    public void setPresenter(DailyContract.Presenter presenter) {
+        mPresenter = presenter;
+    }
+
+    @Override
+    public void showLoadProgress() {
+        isDataLoaded = false;
+        mSwipeRefreshLayout.setRefreshing(true);
+    }
+
+    @Override
+    public void setStories(DailyStories stories) {
+        isDataLoaded = true;
+        mSwipeRefreshLayout.setRefreshing(false);
+        mDate = stories.getDate();
+        mAdapter.setList(stories);
+    }
+
+    @Override
+    public void showLoadError() {
+        isDataLoaded = false;
+        mSwipeRefreshLayout.setRefreshing(false);
+        Toast.makeText(getActivity(), "刷新失败", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setMore(DailyStories stories) {
+        /**
+         * 注意，若果需要查询 11 月 18 日的消息，before 后的数字应为 20131119
+         * 所以在加载前一日时，只需要mDate = dailyStories.getDate()
+         */
+        mDate = stories.getDate();
+        mRecyclerView.setLoadingMore(false);
+        mAdapter.appendList(stories);
+    }
+
+    @Override
+    public void showLoadMoreError() {
+        mRecyclerView.setLoadingMore(false);
+        Toast.makeText(getActivity(), "加载失败", Toast.LENGTH_SHORT).show();
+    }
+
 
 }

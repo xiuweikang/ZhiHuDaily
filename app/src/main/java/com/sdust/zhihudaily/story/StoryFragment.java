@@ -1,4 +1,4 @@
-package com.sdust.zhihudaily.fragment;
+package com.sdust.zhihudaily.story;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -46,7 +46,7 @@ import butterknife.InjectView;
 /**
  * Created by Kevin on 2015/8/10.
  */
-public class StoryFragment extends Fragment {
+public class StoryFragment extends Fragment implements StoryContract.View{
     public static final String TAG = StoryFragment.class.getSimpleName();
 
     @InjectView(R.id.pb)
@@ -91,6 +91,8 @@ public class StoryFragment extends Fragment {
     boolean isNight;
 
     boolean mBackFromSetting;
+
+    private StoryContract.Presenter mPresenter;
 
     public StoryFragment() {
 
@@ -375,4 +377,8 @@ public class StoryFragment extends Fragment {
         return getResources().getDimensionPixelSize(R.dimen.view_header_story_height);
     }
 
+    @Override
+    public void setPresenter(StoryContract.Presenter presenter) {
+        mPresenter = presenter;
+    }
 }

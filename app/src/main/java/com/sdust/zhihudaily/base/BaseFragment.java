@@ -1,8 +1,11 @@
-package com.sdust.zhihudaily.fragment;
+package com.sdust.zhihudaily.base;
 
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+
+import com.sdust.zhihudaily.mainpage.theme.ThemeStoriesFragment;
+import com.sdust.zhihudaily.mainpage.daily.DailyStoriesFragment;
 
 
 public class BaseFragment extends Fragment {

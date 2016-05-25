@@ -6,7 +6,7 @@ import android.content.Intent;
 
 import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.mainpage.MainActivity;
-import com.sdust.zhihudaily.activity.StoryActivity;
+import com.sdust.zhihudaily.story.StoryActivity;
 import com.sdust.zhihudaily.data.model.Story;
 
 

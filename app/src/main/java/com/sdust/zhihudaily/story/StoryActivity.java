@@ -1,4 +1,4 @@
-package com.sdust.zhihudaily.activity;
+package com.sdust.zhihudaily.story;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 
 import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.base.BaseAppCompatActivity;
-import com.sdust.zhihudaily.fragment.StoryFragment;
 import com.sdust.zhihudaily.util.IntentUtils;
 import com.sdust.zhihudaily.util.LogUtils;
 
@@ -34,6 +33,7 @@ public class StoryActivity extends BaseAppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, storyFragment, StoryFragment.TAG)
                     .commit();
+            new StroyPresenter()
         }
     }
     @Override
