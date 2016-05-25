@@ -33,7 +33,7 @@ public class StoryActivity extends BaseAppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, storyFragment, StoryFragment.TAG)
                     .commit();
-            new StroyPresenter()
+            new StoryPresenter(storyFragment);
         }
     }
     @Override

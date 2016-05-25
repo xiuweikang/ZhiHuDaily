@@ -25,10 +25,9 @@ import android.widget.Toast;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.ZhiHuApplication;
-import com.sdust.zhihudaily.data.source.local.db.CollectedDao;
 import com.sdust.zhihudaily.data.model.Editor;
 import com.sdust.zhihudaily.data.model.Story;
-import com.sdust.zhihudaily.data.source.Repository;
+import com.sdust.zhihudaily.data.source.local.db.CollectedDao;
 import com.sdust.zhihudaily.util.IntentUtils;
 import com.sdust.zhihudaily.util.LogUtils;
 import com.sdust.zhihudaily.util.SharedPrefUtils;
@@ -46,7 +45,7 @@ import butterknife.InjectView;
 /**
  * Created by Kevin on 2015/8/10.
  */
-public class StoryFragment extends Fragment implements StoryContract.View{
+public class StoryFragment extends Fragment implements StoryContract.View {
     public static final String TAG = StoryFragment.class.getSimpleName();
 
     @InjectView(R.id.pb)
@@ -149,8 +148,7 @@ public class StoryFragment extends Fragment implements StoryContract.View{
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.inject(this, view);
         scrollView.setOverScrollMode(ScrollView.OVER_SCROLL_NEVER);
-
-        refresh();
+        mPresenter.refresh(mStoryId);
     }
 
 
@@ -246,24 +244,7 @@ public class StoryFragment extends Fragment implements StoryContract.View{
     }
 
     private void refresh() {
-        ZhiHuApplication.getRepository().getStoryDetail(mStoryId, new Repository.Callback<Story>() {
-            @Override
-            public void success(Story story, boolean outDate) {
-                if (getActivity() == null) {
-                    return;
-                }
-                progressBar.setVisibility(View.GONE);
-                mStory = story;
-                bindData(story);
-            }
 
-            @Override
-            public void failure(Exception e) {
-                progressBar.setVisibility(View.GONE);
-                Toast.makeText(ZhiHuApplication.getContext(), "网络异常", Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
-        });
     }
 
     private void bindData(Story story) {
@@ -352,7 +333,7 @@ public class StoryFragment extends Fragment implements StoryContract.View{
         int toolbarHeight = mActionBarToolbar.getHeight();
         LogUtils.d(TAG, "toolbarHeight" + toolbarHeight);
         float contentHeight = storyHeaderViewHeight - toolbarHeight;
-        LogUtils.d(TAG,"ratio"+scrollY / contentHeight);
+        LogUtils.d(TAG, "ratio" + scrollY / contentHeight);
         float ratio = Math.min(scrollY / contentHeight, 1.0f);//设置toolbar的透明度 当scrool滑到HeaderViewHeight - toolbarHeight时 为1
         mActionBarToolbar.getBackground().setAlpha((int) (ratio * 0xFF));
         if (scrollY <= contentHeight) {
@@ -380,5 +361,21 @@ public class StoryFragment extends Fragment implements StoryContract.View{
     @Override
     public void setPresenter(StoryContract.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    @Override
+    public void showStory(Story story) {
+        if (getActivity() == null) {
+            return;
+        }
+        progressBar.setVisibility(View.GONE);
+        mStory = story;
+        bindData(story);
+    }
+
+    @Override
+    public void showError() {
+        progressBar.setVisibility(View.GONE);
+        Toast.makeText(ZhiHuApplication.getContext(), "网络异常", Toast.LENGTH_SHORT).show();
     }
 }
