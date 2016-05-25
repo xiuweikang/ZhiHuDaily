@@ -7,7 +7,7 @@ import com.sdust.zhihudaily.data.model.StartImage;
 /**
  * Created by Kevin on 16/5/24.
  */
-public class WelcomeContract {
+public interface WelcomeContract {
     interface View extends BaseView<Presenter> {
         int getWidth();
         int getHeight();

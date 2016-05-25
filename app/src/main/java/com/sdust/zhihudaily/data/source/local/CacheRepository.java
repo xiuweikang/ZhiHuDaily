@@ -8,6 +8,8 @@ import com.sdust.zhihudaily.data.model.Story;
 import com.sdust.zhihudaily.data.model.Theme;
 import com.sdust.zhihudaily.data.model.Themes;
 
+import java.util.List;
+
 
 public interface CacheRepository {
 
@@ -33,7 +35,10 @@ public interface CacheRepository {
 	void getStoryDetail(String url, Callback<Story> callback);
 	void saveStoryDetail(Story story, String url);
 
-
+	boolean isCollected(String storyId);
+	void saveStory(Story story);
+	List<Story> getAllCollectedStory();
+	void deleteCollected(String storyId);
 
 	public interface Callback<T> {
 		public void success(T t);

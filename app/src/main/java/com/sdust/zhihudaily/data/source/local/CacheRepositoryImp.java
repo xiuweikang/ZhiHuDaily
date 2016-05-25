@@ -15,12 +15,14 @@ import com.sdust.zhihudaily.data.model.StartImage;
 import com.sdust.zhihudaily.data.model.Story;
 import com.sdust.zhihudaily.data.model.Theme;
 import com.sdust.zhihudaily.data.model.Themes;
+import com.sdust.zhihudaily.data.source.local.db.CollectedDao;
 import com.sdust.zhihudaily.util.LogUtils;
 import com.sdust.zhihudaily.util.SharedPrefUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 
 public class CacheRepositoryImp implements CacheRepository {
@@ -30,12 +32,15 @@ public class CacheRepositoryImp implements CacheRepository {
     private static DateFormat df = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 
     private CacheDao mCacheDao;
+    private CollectedDao mCollectedDao;
     private Context mContext;
+
     private Gson mGson;
 
     public CacheRepositoryImp(Context context) {
         this.mContext = context;
         this.mCacheDao = new CacheDao(context);
+        this.mCollectedDao = new CollectedDao(context);
         this.mGson = new Gson();
     }
 
@@ -144,6 +149,26 @@ public class CacheRepositoryImp implements CacheRepository {
     @Override
     public void saveStoryDetail(Story story, String url) {
         saveCacheToDB(story, url);
+    }
+
+    @Override
+    public boolean isCollected(String storyId) {
+        return mCollectedDao.exists(storyId);
+    }
+
+    @Override
+    public void saveStory(Story story) {
+        mCollectedDao.insertCollected(story);
+    }
+
+    @Override
+    public List<Story> getAllCollectedStory() {
+        return mCollectedDao.getAllCollected();
+    }
+
+    @Override
+    public void deleteCollected(String storyId) {
+        mCollectedDao.deleteCollected(storyId);
     }
 
 }

@@ -14,6 +14,8 @@ import com.sdust.zhihudaily.data.source.local.CacheRepository;
 import com.sdust.zhihudaily.data.source.remote.NetRepositoryImp;
 import com.sdust.zhihudaily.data.source.remote.NetRepository;
 
+import java.util.List;
+
 /**
  * 仓库的实现类
  */
@@ -216,6 +218,26 @@ public class RepositoryImp implements Repository {
                 });
             }
         });
+    }
+
+    @Override
+    public boolean isCollected(String storyId) {
+        return mCacheReImp.isCollected(storyId);
+    }
+
+    @Override
+    public void saveStory(Story story) {
+        mCacheReImp.saveStory(story);
+    }
+
+    @Override
+    public List<Story> getAllCollectedStory() {
+        return mCacheReImp.getAllCollectedStory();
+    }
+
+    @Override
+    public void deleteCollected(String storyId) {
+        mCacheReImp.deleteCollected(storyId);
     }
 
 

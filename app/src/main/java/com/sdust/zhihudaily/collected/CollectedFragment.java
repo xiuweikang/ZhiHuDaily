@@ -1,4 +1,4 @@
-package com.sdust.zhihudaily.fragment;
+package com.sdust.zhihudaily.collected;
 
 
 import android.os.Bundle;
@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 
 import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.adapter.CollectedAdapter;
-import com.sdust.zhihudaily.data.source.local.db.CollectedDao;
 import com.sdust.zhihudaily.data.model.Story;
 import com.sdust.zhihudaily.widget.LoadMoreRecyclerView;
 
@@ -26,13 +25,14 @@ import butterknife.InjectView;
 /**
  * Created by Kevin on 2015/8/11.
  */
-public class CollectedFragment extends Fragment {
+public class CollectedFragment extends Fragment implements CollectedContract.View{
 
     private CollectedAdapter mAdapter;
     @InjectView(R.id.recyclerView)
     LoadMoreRecyclerView mRecyclerView;
     private int mItemCount;
 
+    private CollectedContract.Presenter mPresenter;
 
     private List<Story> mCollectedStories;
 
@@ -74,8 +74,7 @@ public class CollectedFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        CollectedDao dao = new CollectedDao(getActivity());
-        mCollectedStories = dao.getAllCollected();
+        mCollectedStories = mPresenter.getAllStory();
         loadFirst();
     }
 
@@ -117,4 +116,8 @@ public class CollectedFragment extends Fragment {
         inflater.inflate(R.menu.menu_collected, menu);
     }
 
+    @Override
+    public void setPresenter(CollectedContract.Presenter presenter) {
+        mPresenter = presenter;
+    }
 }

@@ -7,7 +7,7 @@ import com.sdust.zhihudaily.data.model.DailyStories;
 /**
  * Created by Kevin on 16/5/24.
  */
-public class DailyContract {
+public interface DailyContract {
 
     interface Presenter extends BasePresenter{
         void refresh();

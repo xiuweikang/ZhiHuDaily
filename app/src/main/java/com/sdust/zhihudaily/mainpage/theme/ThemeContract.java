@@ -7,7 +7,7 @@ import com.sdust.zhihudaily.data.model.Theme;
 /**
  * Created by Kevin on 16/5/24.
  */
-public class ThemeContract {
+public interface ThemeContract {
 
     interface Presenter extends BasePresenter{
         void refresh(String themeId);

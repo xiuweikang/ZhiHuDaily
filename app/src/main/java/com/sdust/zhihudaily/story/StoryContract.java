@@ -7,10 +7,13 @@ import com.sdust.zhihudaily.data.model.Story;
 /**
  * Created by Kevin on 16/5/25.
  */
-public class StoryContract {
+public interface StoryContract {
 
     interface Presenter extends BasePresenter{
         void refresh(String storyId);
+        boolean isCollected(String storyId);
+        void saveStory(Story story);
+        void deleteStory(String storyId);
     }
     interface View extends BaseView<Presenter> {
         void showStory(Story story);

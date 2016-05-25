@@ -7,7 +7,7 @@ import com.sdust.zhihudaily.data.model.Themes;
 /**
  * Created by Kevin on 16/5/24.
  */
-public class NavigationContract {
+public interface NavigationContract {
     interface View extends BaseView<Presenter>{
         void showThemes(Themes themes);
     }

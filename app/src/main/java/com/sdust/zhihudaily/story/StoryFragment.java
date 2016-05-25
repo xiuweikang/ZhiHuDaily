@@ -27,7 +27,6 @@ import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.ZhiHuApplication;
 import com.sdust.zhihudaily.data.model.Editor;
 import com.sdust.zhihudaily.data.model.Story;
-import com.sdust.zhihudaily.data.source.local.db.CollectedDao;
 import com.sdust.zhihudaily.util.IntentUtils;
 import com.sdust.zhihudaily.util.LogUtils;
 import com.sdust.zhihudaily.util.SharedPrefUtils;
@@ -78,8 +77,6 @@ public class StoryFragment extends Fragment implements StoryContract.View {
     private String mStoryId;
 
     private Story mStory;
-
-    private CollectedDao mCollectedDao;
 
     private Toolbar mActionBarToolbar;
 
@@ -180,8 +177,7 @@ public class StoryFragment extends Fragment implements StoryContract.View {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_story, menu);
         MenuItem collectedMenu = menu.findItem(R.id.action_collect);
-        mCollectedDao = new CollectedDao(getActivity());
-        isCollected = mCollectedDao.exists(mStoryId);
+        isCollected = mPresenter.isCollected(mStoryId);
         if (isCollected) {
             collectedMenu.setIcon(R.drawable.collected);
         }
@@ -203,7 +199,7 @@ public class StoryFragment extends Fragment implements StoryContract.View {
                     Toast.makeText(getActivity(), "收藏成功", Toast.LENGTH_SHORT).show();
                     isCollected = true;
                 } else {
-                    mCollectedDao.deleteCollected(mStoryId);
+                    mPresenter.deleteStory(mStoryId);
                     item.setIcon(R.drawable.collect);
                     Toast.makeText(getActivity(), "取消收藏", Toast.LENGTH_SHORT).show();
                     isCollected = false;
@@ -220,7 +216,7 @@ public class StoryFragment extends Fragment implements StoryContract.View {
         imageUrlList.add(getArguments().getString(IntentUtils.EXTRA_STORY_IMAGES));
         collected.setImages(imageUrlList);
         collected.setMultiPic(getArguments().getString(IntentUtils.EXTRA_STORY_MULTIPIC));
-        mCollectedDao.insertCollected(collected);
+        mPresenter.saveStory(collected);
     }
 
     public void initWebView() {
@@ -243,9 +239,6 @@ public class StoryFragment extends Fragment implements StoryContract.View {
 
     }
 
-    private void refresh() {
-
-    }
 
     private void bindData(Story story) {
         mHasImage = !TextUtils.isEmpty(story.getImage());

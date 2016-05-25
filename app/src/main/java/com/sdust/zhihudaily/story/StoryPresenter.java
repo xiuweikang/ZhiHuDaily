@@ -35,4 +35,19 @@ public class StoryPresenter implements StoryContract.Presenter {
             }
         });
     }
+
+    @Override
+    public boolean isCollected(String storyId) {
+        return ZhiHuApplication.getRepository().isCollected(storyId);
+    }
+
+    @Override
+    public void saveStory(Story story) {
+        ZhiHuApplication.getRepository().saveStory(story);
+    }
+
+    @Override
+    public void deleteStory(String storyId) {
+        ZhiHuApplication.getRepository().deleteCollected(storyId);
+    }
 }
