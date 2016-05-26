@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.ZhiHuApplication;
+import com.sdust.zhihudaily.comment.CommentActivity;
 import com.sdust.zhihudaily.data.model.Editor;
 import com.sdust.zhihudaily.data.model.Story;
 import com.sdust.zhihudaily.data.model.StoryExtra;
@@ -186,7 +187,15 @@ public class StoryFragment extends Fragment implements StoryContract.View {
         if (isCollected) {
             collectedMenu.setIcon(R.drawable.collected);
         }
+        MenuItem commentMenu = menu.findItem(R.id.action_comment);
+        commentMenu.getActionView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CommentActivity.showCommentActivity(getActivity(), mStoryId, mCommentNum);
+            }
+        });
         mMenu = menu;
+
     }
 
     @Override
@@ -204,7 +213,6 @@ public class StoryFragment extends Fragment implements StoryContract.View {
                     item.setIcon(R.drawable.collected);
                     Toast.makeText(getActivity(), "收藏成功", Toast.LENGTH_SHORT).show();
                     isCollected = true;
-                    updateStrotyExtra();
                 } else {
                     mPresenter.deleteStory(mStoryId);
                     item.setIcon(R.drawable.collect);
@@ -213,11 +221,6 @@ public class StoryFragment extends Fragment implements StoryContract.View {
                 }
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void updateStrotyExtra() {
-        MenuItem item = mMenu.findItem(R.id.action_collect);
-        item.setTitle("xiu");
     }
 
     private void insertCollectedDao() {
@@ -393,11 +396,14 @@ public class StoryFragment extends Fragment implements StoryContract.View {
     public void showStoryExtraError() {
     }
 
+    private String mCommentNum = "";
+
     private void updateMenu(StoryExtra storyExtra) {
         String commentNum = storyExtra.getLongComment() + storyExtra.getShortComment() + "";
-        TextView commentTxt = (TextView)mMenu.findItem(R.id.action_comment).getActionView().findViewById(R.id.value);
+        mCommentNum = commentNum;
+        TextView commentTxt = (TextView) mMenu.findItem(R.id.action_comment).getActionView().findViewById(R.id.value);
         commentTxt.setText(commentNum);
-        TextView praiseTxt = (TextView)mMenu.findItem(R.id.action_praise).getActionView().findViewById(R.id.value);
+        TextView praiseTxt = (TextView) mMenu.findItem(R.id.action_praise).getActionView().findViewById(R.id.value);
         praiseTxt.setText(storyExtra.getPopularity() + "");
     }
 

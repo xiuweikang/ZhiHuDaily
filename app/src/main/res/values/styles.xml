@@ -16,7 +16,6 @@
         <item name="android:textColorSecondary">@color/style_text_color_secondary</item>
 
     </style>
-    <style name="SettingTheme" parent="AppTheme.Base"/>
 
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>

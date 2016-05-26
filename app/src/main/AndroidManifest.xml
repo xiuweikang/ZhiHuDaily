@@ -4,15 +4,17 @@
           android:versionCode="1"
           android:versionName="1.0">
 
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="21"/>
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
-    <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="21"/>
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".ZhiHuApplication"
@@ -22,42 +24,37 @@
         <activity
             android:name=".welcome.WelcomeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/FullscreenTheme"
-            >
+            android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name=".mainpage.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_main"
             android:launchMode="singleTop">
         </activity>
-
         <activity
             android:name=".setting.SettingsActivity"
-            android:theme="@style/SettingTheme"
-            android:label="@string/title_activity_settings"
-            android:configChanges="orientation|keyboardHidden|screenSize">
-
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_settings">
         </activity>
-
         <activity
             android:name=".story.StoryActivity"
-            android:label="@string/title_activity_story"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:hardwareAccelerated="false"
-            android:configChanges="orientation|keyboardHidden|screenSize">
+            android:label="@string/title_activity_story">
         </activity>
         <activity
             android:name=".collected.CollectedActivity"
-            android:label="@string/title_activity_collected"
-            android:configChanges="orientation|keyboardHidden|screenSize">
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_collected">
         </activity>
-
+        <activity android:name=".comment.CommentActivity">
+        </activity>
     </application>
 
 </manifest>

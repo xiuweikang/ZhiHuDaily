@@ -13,12 +13,10 @@ import android.widget.Toast;
 
 import com.nostra13.universalimageloader.utils.L;
 import com.sdust.zhihudaily.R;
-import com.sdust.zhihudaily.ZhiHuApplication;
 import com.sdust.zhihudaily.adapter.DailyStoriesAdapter;
 import com.sdust.zhihudaily.adapter.holder.DateViewHolder;
-import com.sdust.zhihudaily.data.model.DailyStories;
-import com.sdust.zhihudaily.data.source.Repository;
 import com.sdust.zhihudaily.base.BaseFragment;
+import com.sdust.zhihudaily.data.model.DailyStories;
 import com.sdust.zhihudaily.util.LogUtils;
 import com.sdust.zhihudaily.widget.LoadMoreRecyclerView;
 import com.sdust.zhihudaily.widget.MyViewPager;
@@ -68,8 +66,6 @@ public class DailyStoriesFragment extends BaseFragment implements DailyContract.
                 mRecyclerView.setLoadingMore(true);
                 mPresenter.loadMore(mDate);
             }
-
-
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -153,31 +149,6 @@ public class DailyStoriesFragment extends BaseFragment implements DailyContract.
                 ((MyViewPager) view).stopAutoScroll();
             }
         }
-    }
-
-
-    private void loadMore() {
-
-        ZhiHuApplication.getRepository().getBeforeDailyStories(mDate, new Repository.Callback<DailyStories>() {
-            @Override
-            public void success(DailyStories dailyStories, boolean outDate) {
-                /**
-                 * 注意，若果需要查询 11 月 18 日的消息，before 后的数字应为 20131119
-                 * 所以在加载前一日时，只需要mDate = dailyStories.getDate()
-                 */
-                mDate = dailyStories.getDate();
-                mRecyclerView.setLoadingMore(false);
-                mAdapter.appendList(dailyStories);
-            }
-
-
-            @Override
-            public void failure(Exception e) {
-                mRecyclerView.setLoadingMore(false);
-                Toast.makeText(getActivity(), "加载失败", Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
-        });
     }
 
     @Override

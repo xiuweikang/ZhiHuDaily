@@ -19,6 +19,7 @@ public class SettingsActivity extends BaseAppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mActionBarToolbar.getBackground().setAlpha(0xff);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                     .add(R.id.container, new SettingFragment())
