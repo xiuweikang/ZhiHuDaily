@@ -1,5 +1,6 @@
 package com.sdust.zhihudaily.data.source.remote;
 
+import com.sdust.zhihudaily.data.model.StoryExtra;
 import com.sdust.zhihudaily.net.api.ZhiHuApi;
 import com.sdust.zhihudaily.data.model.DailyStories;
 import com.sdust.zhihudaily.data.model.StartImage;
@@ -127,6 +128,22 @@ public class NetRepositoryImp implements NetRepository {
             @Override
             public void failure(RetrofitError error) {
                 callback.failure(error, error.getUrl());
+            }
+        });
+    }
+
+    @Override
+    public void getStroyExtra(String storyId, final Callback<StoryExtra> callback) {
+        ZhiHuApi.createApi().getStoryExtra(storyId,new retrofit.Callback<StoryExtra>() {
+
+            @Override
+            public void success(StoryExtra storyExtra, Response response) {
+                callback.success(storyExtra,response.getUrl());
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                callback.failure(error,error.getUrl());
             }
         });
     }

@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -27,6 +28,7 @@ import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.ZhiHuApplication;
 import com.sdust.zhihudaily.data.model.Editor;
 import com.sdust.zhihudaily.data.model.Story;
+import com.sdust.zhihudaily.data.model.StoryExtra;
 import com.sdust.zhihudaily.util.IntentUtils;
 import com.sdust.zhihudaily.util.LogUtils;
 import com.sdust.zhihudaily.util.SharedPrefUtils;
@@ -146,6 +148,7 @@ public class StoryFragment extends Fragment implements StoryContract.View {
         ButterKnife.inject(this, view);
         scrollView.setOverScrollMode(ScrollView.OVER_SCROLL_NEVER);
         mPresenter.refresh(mStoryId);
+        mPresenter.getStoryExtra(mStoryId);
     }
 
 
@@ -172,6 +175,8 @@ public class StoryFragment extends Fragment implements StoryContract.View {
         mBackFromSetting = true;
     }
 
+    private Menu mMenu;
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -181,6 +186,7 @@ public class StoryFragment extends Fragment implements StoryContract.View {
         if (isCollected) {
             collectedMenu.setIcon(R.drawable.collected);
         }
+        mMenu = menu;
     }
 
     @Override
@@ -198,6 +204,7 @@ public class StoryFragment extends Fragment implements StoryContract.View {
                     item.setIcon(R.drawable.collected);
                     Toast.makeText(getActivity(), "收藏成功", Toast.LENGTH_SHORT).show();
                     isCollected = true;
+                    updateStrotyExtra();
                 } else {
                     mPresenter.deleteStory(mStoryId);
                     item.setIcon(R.drawable.collect);
@@ -206,6 +213,11 @@ public class StoryFragment extends Fragment implements StoryContract.View {
                 }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void updateStrotyExtra() {
+        MenuItem item = mMenu.findItem(R.id.action_collect);
+        item.setTitle("xiu");
     }
 
     private void insertCollectedDao() {
@@ -371,4 +383,22 @@ public class StoryFragment extends Fragment implements StoryContract.View {
         progressBar.setVisibility(View.GONE);
         Toast.makeText(ZhiHuApplication.getContext(), "网络异常", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void showStoryExtra(StoryExtra storyExtra) {
+        updateMenu(storyExtra);
+    }
+
+    @Override
+    public void showStoryExtraError() {
+    }
+
+    private void updateMenu(StoryExtra storyExtra) {
+        String commentNum = storyExtra.getLongComment() + storyExtra.getShortComment() + "";
+        TextView commentTxt = (TextView)mMenu.findItem(R.id.action_comment).getActionView().findViewById(R.id.value);
+        commentTxt.setText(commentNum);
+        TextView praiseTxt = (TextView)mMenu.findItem(R.id.action_praise).getActionView().findViewById(R.id.value);
+        praiseTxt.setText(storyExtra.getPopularity() + "");
+    }
+
 }

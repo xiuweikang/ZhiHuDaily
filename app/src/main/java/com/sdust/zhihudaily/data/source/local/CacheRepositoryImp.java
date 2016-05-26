@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
+import com.sdust.zhihudaily.data.model.StoryExtra;
 import com.sdust.zhihudaily.data.source.local.db.CacheDao;
 import com.sdust.zhihudaily.data.model.Cache;
 import com.sdust.zhihudaily.data.model.DailyStories;
@@ -149,6 +150,17 @@ public class CacheRepositoryImp implements CacheRepository {
     @Override
     public void saveStoryDetail(Story story, String url) {
         saveCacheToDB(story, url);
+    }
+
+    @Override
+    public void getStroyExtra(String url, Callback<StoryExtra> callback) {
+        getDataObject(url,StoryExtra.class,callback);
+    }
+
+    @Override
+    public void saveStoryExtra(StoryExtra story, String url) {
+        saveCacheToDB(story,url);
+
     }
 
     @Override

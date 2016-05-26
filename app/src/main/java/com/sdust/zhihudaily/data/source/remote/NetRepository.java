@@ -4,6 +4,7 @@ package com.sdust.zhihudaily.data.source.remote;
 import com.sdust.zhihudaily.data.model.DailyStories;
 import com.sdust.zhihudaily.data.model.StartImage;
 import com.sdust.zhihudaily.data.model.Story;
+import com.sdust.zhihudaily.data.model.StoryExtra;
 import com.sdust.zhihudaily.data.model.Theme;
 import com.sdust.zhihudaily.data.model.Themes;
 
@@ -22,6 +23,9 @@ public interface NetRepository {
 	void getBeforeThemeStories(String themeId, String storyId, Callback<Theme> callback);
 
 	void getStoryDetail(String storyId, Callback<Story> callback);
+
+	void getStroyExtra(String storyId, Callback<StoryExtra> callback);
+
 
 
 	public interface Callback<T> {

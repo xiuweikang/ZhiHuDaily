@@ -23,6 +23,8 @@
     <string name="share_from">-来自知乎日报的分享</string>
     <string name="share_link">链接：</string>
     <string name="action_collect">收藏</string>
+    <string name="action_comment">评论</string>
+    <string name="action_praise">赞</string>
     <string name="title_activity_collected">收藏夹</string>
     <string name="pref_clear_cache">清理缓存</string>
     <string name="pref_header_general">General</string>

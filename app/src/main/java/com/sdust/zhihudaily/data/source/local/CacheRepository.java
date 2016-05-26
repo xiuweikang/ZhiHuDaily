@@ -5,6 +5,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.sdust.zhihudaily.data.model.DailyStories;
 import com.sdust.zhihudaily.data.model.StartImage;
 import com.sdust.zhihudaily.data.model.Story;
+import com.sdust.zhihudaily.data.model.StoryExtra;
 import com.sdust.zhihudaily.data.model.Theme;
 import com.sdust.zhihudaily.data.model.Themes;
 
@@ -34,6 +35,9 @@ public interface CacheRepository {
 
 	void getStoryDetail(String url, Callback<Story> callback);
 	void saveStoryDetail(Story story, String url);
+
+	void getStroyExtra(String url, Callback<StoryExtra> callback);
+	void saveStoryExtra(StoryExtra story,String url);
 
 	boolean isCollected(String storyId);
 	void saveStory(Story story);

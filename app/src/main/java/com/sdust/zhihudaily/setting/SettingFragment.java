@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,8 +38,8 @@ public class SettingFragment extends Fragment {
     TextView mTxtVersion;
     @InjectView(R.id.txt_about_me)
     TextView mTxtAboutMe;
-    @InjectView(R.id.txt_clear_cache)
-    TextView mTxtClearCache;
+    @InjectView(R.id.layout_clear_cache)
+    LinearLayout mLayoutClearCache;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,7 +58,7 @@ public class SettingFragment extends Fragment {
 
     private void initView() {
         mTxtCacheSize.setText(FileUtils.getCacheSize());
-        mTxtClearCache.setOnClickListener(new View.OnClickListener() {
+        mLayoutClearCache.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clearCache();

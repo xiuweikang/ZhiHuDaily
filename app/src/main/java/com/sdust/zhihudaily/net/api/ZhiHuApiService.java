@@ -4,6 +4,7 @@ package com.sdust.zhihudaily.net.api;
 import com.sdust.zhihudaily.data.model.DailyStories;
 import com.sdust.zhihudaily.data.model.StartImage;
 import com.sdust.zhihudaily.data.model.Story;
+import com.sdust.zhihudaily.data.model.StoryExtra;
 import com.sdust.zhihudaily.data.model.Theme;
 import com.sdust.zhihudaily.data.model.Themes;
 
@@ -35,4 +36,6 @@ public interface ZhiHuApiService {
     @GET("/news/{storyId}")
     void getStoryDetail(@Path("storyId") String storyId, Callback<Story> callback);
 
+    @GET("/story-extra/{storyId}")
+    void getStoryExtra(@Path("storyId") String storyId,Callback<StoryExtra> callback);
 }

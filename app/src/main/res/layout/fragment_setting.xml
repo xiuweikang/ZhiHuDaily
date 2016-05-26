@@ -1,5 +1,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -43,6 +44,7 @@
     <View
         style="@style/divider"
         />
+
     <LinearLayout
         style="@style/LayoutWithPadding"
         android:gravity="center_vertical"
@@ -70,39 +72,54 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
+
     <View
         style="@style/divider"
         />
-    <TextView
-        android:id="@+id/txt_clear_cache"
-        style="@style/TextViewBase.Main"
-        android:layout_marginLeft="20dp"
-        android:text="@string/pref_clear_cache"
-        />
-    <TextView
-        android:layout_marginTop="6dp"
-        android:layout_marginLeft="20dp"
-        android:id="@+id/txt_cache_size"
-        style="@style/TextViewBase.Info"/>
+
+    <LinearLayout
+        android:id="@+id/layout_clear_cache"
+        android:orientation="vertical"
+        style="@style/LayoutWithPadding">
+
+        <TextView
+            style="@style/TextViewBase.Main"
+            android:layout_width="match_parent"
+            android:text="@string/pref_clear_cache"
+            />
+
+        <TextView
+            android:id="@+id/txt_cache_size"
+            style="@style/TextViewBase.Info"
+            android:layout_marginTop="6dp"/>
+
+    </LinearLayout>
 
     <TextView
         style="@style/TextViewBase.title"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/pref_about"
         />
+
     <TextView
+        android:id="@+id/txt_version"
         style="@style/TextViewBase.Main"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:id="@+id/txt_version"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
         android:text="@string/pref_version"
         />
+
     <TextView
         android:id="@+id/txt_about_me"
         style="@style/TextViewBase.Main"
+        android:layout_width="match_parent"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:text="@string/pref_about_me"
         />
 

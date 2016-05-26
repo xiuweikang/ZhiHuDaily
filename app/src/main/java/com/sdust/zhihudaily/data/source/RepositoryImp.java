@@ -7,6 +7,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.sdust.zhihudaily.data.model.DailyStories;
 import com.sdust.zhihudaily.data.model.StartImage;
 import com.sdust.zhihudaily.data.model.Story;
+import com.sdust.zhihudaily.data.model.StoryExtra;
 import com.sdust.zhihudaily.data.model.Theme;
 import com.sdust.zhihudaily.data.model.Themes;
 import com.sdust.zhihudaily.data.source.local.CacheRepositoryImp;
@@ -214,6 +215,32 @@ public class RepositoryImp implements Repository {
                     @Override
                     public void failure(Exception e) {
                         callback.failure(error);
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
+    public void getStroyExtra(String storyId, final Callback<StoryExtra> callback) {
+        mNetReImp.getStroyExtra(storyId, new NetRepository.Callback<StoryExtra>() {
+            @Override
+            public void success(StoryExtra storyExtra, String url) {
+                callback.success(storyExtra, false);
+                mCacheReImp.saveStoryExtra(storyExtra, url);
+            }
+
+            @Override
+            public void failure(Exception e, String url) {
+                mCacheReImp.getStroyExtra(url, new CacheRepository.Callback<StoryExtra>() {
+                    @Override
+                    public void success(StoryExtra storyExtra) {
+                        callback.success(storyExtra, true);
+                    }
+
+                    @Override
+                    public void failure(Exception e) {
+                        callback.failure(e);
                     }
                 });
             }

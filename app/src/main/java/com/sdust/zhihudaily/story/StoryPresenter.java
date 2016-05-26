@@ -2,6 +2,7 @@ package com.sdust.zhihudaily.story;
 
 import com.sdust.zhihudaily.ZhiHuApplication;
 import com.sdust.zhihudaily.data.model.Story;
+import com.sdust.zhihudaily.data.model.StoryExtra;
 import com.sdust.zhihudaily.data.source.Repository;
 
 /**
@@ -36,6 +37,7 @@ public class StoryPresenter implements StoryContract.Presenter {
         });
     }
 
+
     @Override
     public boolean isCollected(String storyId) {
         return ZhiHuApplication.getRepository().isCollected(storyId);
@@ -49,5 +51,21 @@ public class StoryPresenter implements StoryContract.Presenter {
     @Override
     public void deleteStory(String storyId) {
         ZhiHuApplication.getRepository().deleteCollected(storyId);
+    }
+
+    @Override
+    public void getStoryExtra(String storyId) {
+        ZhiHuApplication.getRepository().getStroyExtra(storyId, new Repository.Callback<StoryExtra>() {
+            @Override
+            public void success(StoryExtra storyExtra, boolean outDate) {
+                mView.showStoryExtra(storyExtra);
+            }
+
+            @Override
+            public void failure(Exception e) {
+                mView.showStoryExtraError();
+                e.printStackTrace();
+            }
+        });
     }
 }
