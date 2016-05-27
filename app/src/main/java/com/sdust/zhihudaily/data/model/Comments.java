@@ -3,7 +3,6 @@ package com.sdust.zhihudaily.data.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import org.w3c.dom.Comment;
 
 import java.util.List;
 
@@ -16,4 +15,11 @@ public class Comments {
     @SerializedName("comments")
     private List<Comment> commentList;
 
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
+    }
 }

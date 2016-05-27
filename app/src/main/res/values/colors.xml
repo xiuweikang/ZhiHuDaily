@@ -13,7 +13,7 @@
     <color name="style_text_color_secondary">#000000</color>
     <color name="style_divider">#efefef</color>
     <color name="style_window_background">#ffffffff</color>
-
+    <color name="style_hint">#bfbfbf</color>
     <color name="style_navigation_bar_color">#000000</color>
 
     <!--setting theme-->
