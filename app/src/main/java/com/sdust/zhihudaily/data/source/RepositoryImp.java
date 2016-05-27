@@ -274,8 +274,28 @@ public class RepositoryImp implements Repository {
     }
 
     @Override
-    public void getShortComment(String storyId, Callback<Comments> callback) {
+    public void getShortComment(String storyId, final Callback<Comments> callback) {
+        mNetReImp.getShortComment(storyId, new NetRepository.Callback<Comments>() {
+            @Override
+            public void success(Comments comment, String url) {
+                callback.success(comment, false);
+                mCacheReImp.saveCommnet(comment, url);
+            }
 
+            @Override
+            public void failure(Exception e, String url) {
+                mCacheReImp.getComment(url, new CacheRepository.Callback<Comments>() {
+                    @Override
+                    public void success(Comments comments) {
+                        callback.success(comments, true);
+                    }
+                    @Override
+                    public void failure(Exception e) {
+                        callback.failure(e);
+                    }
+                });
+            }
+        });
     }
 
     @Override

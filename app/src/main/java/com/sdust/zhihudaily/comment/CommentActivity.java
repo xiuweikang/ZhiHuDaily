@@ -34,9 +34,9 @@ public class CommentActivity extends BaseAppCompatActivity {
         int shortCommentNum = intent.getIntExtra(SHORT_COMMENT_NUM,0);
         setTitle((longCommentNum + shortCommentNum) + "条评论");
         if (savedInstanceState == null) {
-            CommentFragment fragment = (CommentFragment) CommentFragment.newInstance(storyId,longCommentNum,shortCommentNum);
+            CommentFragment fragment = CommentFragment.newInstance(storyId,longCommentNum,shortCommentNum);
             FragmentManager manager = getFragmentManager();
-            manager.beginTransaction().add(R.id.container, fragment);
+            manager.beginTransaction().add(R.id.container, fragment).commit();
             new CommentPresenter(fragment);
         }
     }

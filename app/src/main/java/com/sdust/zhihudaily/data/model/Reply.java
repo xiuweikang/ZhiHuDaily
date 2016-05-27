@@ -7,7 +7,7 @@ import com.google.gson.annotations.Expose;
  */
 public class Reply {
     @Expose
-    private String cotent;
+    private String content;
 
     @Expose
     private String status;
@@ -19,11 +19,11 @@ public class Reply {
     private String author;
 
     public String getCotent() {
-        return cotent;
+        return content;
     }
 
     public void setCotent(String cotent) {
-        this.cotent = cotent;
+        this.content = cotent;
     }
 
     public String getStatus() {

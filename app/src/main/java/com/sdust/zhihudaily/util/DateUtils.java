@@ -36,4 +36,8 @@ public class DateUtils {
         }
         return mData;
     }
+
+    public static String getTime(long time) {
+        return new java.text.SimpleDateFormat("MM-dd HH:mm").format(new java.util.Date(time));
+    }
 }

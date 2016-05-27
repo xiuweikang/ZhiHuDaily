@@ -3,6 +3,7 @@ package com.sdust.zhihudaily.comment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,19 +40,21 @@ public class CommentFragment extends Fragment implements CommentContract.View {
     LoadMoreRecyclerView mRecyclerViewLong;
     @InjectView(R.id.recyclerView_short)
     LoadMoreRecyclerView mRecyclerViewShort;
+    @InjectView(R.id.layout_fold)
+    LinearLayout mLayoutFold;
     private CommentContract.Presenter mPresenter;
 
     private static final String STORY_ID = "story_id";
     private static final String SHORT_COMMENT_NUM = "short_comment_num";
     private static final String LONG_COMMENT_NUM = "long_comment_num";
 
-    public static Fragment newInstance(String storyId, int longNum, int shortNum) {
+    public static CommentFragment newInstance(String storyId, int longNum, int shortNum) {
 
         Bundle bundle = new Bundle();
         bundle.putString(STORY_ID, storyId);
         bundle.putInt(SHORT_COMMENT_NUM, shortNum);
         bundle.putInt(LONG_COMMENT_NUM, longNum);
-        Fragment fragment = new CommentFragment();
+        CommentFragment fragment = new CommentFragment();
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -60,6 +63,7 @@ public class CommentFragment extends Fragment implements CommentContract.View {
     private int mShortCommentNum;
     private int mLongCommentNum;
     private CommentAdapter mLongCommentAdapter;
+    private CommentAdapter mShortCommentAdapter;
 
 
     @Override
@@ -89,18 +93,28 @@ public class CommentFragment extends Fragment implements CommentContract.View {
         initView();
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
 
     private void initView() {
         mTxtLongCommentNum.setText(mLongCommentNum + "条长评");
         mTxtShortCommentNum.setText(mShortCommentNum + "条短评");
+        LinearLayoutManager mLayoutManagerLong = new LinearLayoutManager(getActivity());
+        LinearLayoutManager mLayoutManagerShort = new LinearLayoutManager(getActivity());
+        mRecyclerViewLong.setLayoutManager(mLayoutManagerLong);
+        mRecyclerViewShort.setLayoutManager(mLayoutManagerShort);
         mLongCommentAdapter = new CommentAdapter();
+        mShortCommentAdapter = new CommentAdapter();
         mRecyclerViewLong.setAdapter(mLongCommentAdapter);
+        mRecyclerViewShort.setAdapter(mShortCommentAdapter);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.refresh(mStoryId);
+        mPresenter.getLongCommnet(mStoryId);
     }
 
     @Override
@@ -116,23 +130,28 @@ public class CommentFragment extends Fragment implements CommentContract.View {
 
     @Override
     public void showLongComment(Comments comment) {
-        if(comment == null || comment.getCommentList().size() == 0) {
-            showLongCommnetError();
+        if (comment == null || comment.getCommentList().size() == 0) {
+            showLongCommentError();
+            return;
         }
         List<Comment> commentList = comment.getCommentList();
         mLongCommentAdapter.setCommentList(commentList);
+        mRecyclerViewLong.setVisibility(View.VISIBLE);
+        mLayoutEmpty.setVisibility(View.GONE);
 
     }
 
     @Override
-    public void showLongCommnetError() {
+    public void showLongCommentError() {
         mLayoutEmpty.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showProgress() {
         mRecyclerViewLong.setVisibility(View.GONE);
+        mLayoutEmpty.setVisibility(View.VISIBLE);
         mPb.setVisibility(View.VISIBLE);
+
     }
 
     @Override

@@ -10,12 +10,14 @@ import com.sdust.zhihudaily.data.model.Comments;
 public interface CommentContract {
 
     interface Presenter extends BasePresenter {
-        void refresh(String storyId);
+        void getLongCommnet(String storyId);
+        void getShortComment(String storyId);
 
     }
     interface View extends BaseView<Presenter>{
         void showLongComment(Comments commnet);
-        void showLongCommnetError();
+        void showLongCommentError();
+        void showShortComment(Comments comment);
         void showProgress();
         void hideProgress();
     }

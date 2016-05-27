@@ -55,6 +55,8 @@
         </activity>
         <activity android:name=".comment.CommentActivity">
         </activity>
+        <activity android:name=".collected.TestActivity">
+        </activity>
     </application>
 
 </manifest>

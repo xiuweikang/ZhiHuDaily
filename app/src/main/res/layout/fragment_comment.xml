@@ -3,90 +3,102 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/txt_long_comment_num"
-            style="@style/TextViewBase.Main"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            tools:text="1条评论"
-            />
-
-        <View
-            style="@style/divider"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            />
-
-        <View
-            style="@style/divider"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            />
-
-        <com.sdust.zhihudaily.widget.LoadMoreRecyclerView
-            android:id="@+id/recyclerView_long"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:visibility="gone"
-            ></com.sdust.zhihudaily.widget.LoadMoreRecyclerView>
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/layout_empty"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/comment_empty"
-                />
-
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/empty_comment"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/txt_short_comment_num"
+                android:id="@+id/txt_long_comment_num"
                 style="@style/TextViewBase.Main"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
                 tools:text="1条评论"
                 />
-            <ImageView
-                android:id="@+id/img_fold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_comment_fold"
+
+            <View
+                style="@style/divider"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
                 />
+
+
+            <com.sdust.zhihudaily.widget.LoadMoreRecyclerView
+                android:id="@+id/recyclerView_long"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:visibility="gone"
+                ></com.sdust.zhihudaily.widget.LoadMoreRecyclerView>
+
+            <LinearLayout
+                android:id="@+id/layout_empty"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/comment_empty"
+                    />
+
+                <TextView
+                    style="@style/TextViewBase.Info"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/empty_comment"
+                    android:textColor="@color/style_hint"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_fold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/txt_short_comment_num"
+                    style="@style/TextViewBase.Main"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    tools:text="1条评论"
+                    />
+
+                <ImageView
+                    android:id="@+id/img_fold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_comment_fold"
+                    />
+            </LinearLayout>
+
+            <View
+                style="@style/divider"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                />
+
+            <com.sdust.zhihudaily.widget.LoadMoreRecyclerView
+                android:id="@+id/recyclerView_short"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+            </com.sdust.zhihudaily.widget.LoadMoreRecyclerView>
+
         </LinearLayout>
-        <com.sdust.zhihudaily.widget.LoadMoreRecyclerView
-            android:id="@+id/recyclerView_short"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></com.sdust.zhihudaily.widget.LoadMoreRecyclerView>
-    </LinearLayout>
+    </ScrollView>
 
     <ProgressBar
         android:id="@+id/pb"
@@ -94,4 +106,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         />
+
 </FrameLayout>

@@ -148,20 +148,19 @@ public class StoryFragment extends Fragment implements StoryContract.View {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.inject(this, view);
         scrollView.setOverScrollMode(ScrollView.OVER_SCROLL_NEVER);
-        mPresenter.refresh(mStoryId);
-        mPresenter.getStoryExtra(mStoryId);
     }
 
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        mPresenter.refresh(mStoryId);
+        mPresenter.getStoryExtra(mStoryId);
 
         if (mBackFromSetting && isNight != SharedPrefUtils.getIsNiaghtMode(getActivity())) {
             isNight = !isNight;
@@ -182,6 +181,7 @@ public class StoryFragment extends Fragment implements StoryContract.View {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_story, menu);
+        mMenu = menu;
         MenuItem collectedMenu = menu.findItem(R.id.action_collect);
         isCollected = mPresenter.isCollected(mStoryId);
         if (isCollected) {
@@ -194,7 +194,6 @@ public class StoryFragment extends Fragment implements StoryContract.View {
                 CommentActivity.showCommentActivity(getActivity(), mStoryId, mLongCommentNum,mShortCommentNum);
             }
         });
-        mMenu = menu;
 
     }
 
@@ -273,6 +272,7 @@ public class StoryFragment extends Fragment implements StoryContract.View {
                 mActionBarToolbar.getBackground().setAlpha(0);
             }
             spaceView.setVisibility(View.VISIBLE);
+            rlStoryHeader.removeAllViews();
             rlStoryHeader.addView(storyHeaderView);
             storyHeaderView.bindData(mStory.getTitle(), mStory.getImageSource(), mStory.getImage(), mOptions);
         } else {
@@ -400,10 +400,13 @@ public class StoryFragment extends Fragment implements StoryContract.View {
     private int mShortCommentNum = 0;
 
     private void updateMenu(StoryExtra storyExtra) {
+        if(mMenu == null) {
+            return;
+        }
         mLongCommentNum = storyExtra.getLongComment();
         mShortCommentNum = storyExtra.getShortComment();
         TextView commentTxt = (TextView) mMenu.findItem(R.id.action_comment).getActionView().findViewById(R.id.value);
-        commentTxt.setText(mLongCommentNum + mShortCommentNum);
+        commentTxt.setText((mLongCommentNum + mShortCommentNum) + "");
         TextView praiseTxt = (TextView) mMenu.findItem(R.id.action_praise).getActionView().findViewById(R.id.value);
         praiseTxt.setText(storyExtra.getPopularity() + "");
     }

@@ -2,19 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="wrap_content"
               android:orientation="horizontal"
               android:padding="16dp">
 
     <ImageView
         android:id="@+id/avatarView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         ></ImageView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="6dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -30,17 +31,12 @@
                 tools:text="修维康"
                 />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/comment_vote"
-                />
-
             <TextView
                 android:id="@+id/txt_vote_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/TextViewBase.Info"
                 android:layout_marginLeft="2dp"
+                android:drawableLeft="@drawable/comment_vote"
+                android:drawablePadding="4dp"
                 tools:text="123"
                 />
         </LinearLayout>
@@ -55,14 +51,14 @@
         <TextView
             android:id="@+id/txt_reply"
             style="@style/TextViewBase.Info"
-            android:layout_marginTop="4dp"
             android:lineSpacingExtra="4dp"
+            android:paddingTop="4dp"
             tools:text="哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             android:orientation="horizontal">
 
             <TextView
