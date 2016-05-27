@@ -3,7 +3,6 @@ package com.sdust.zhihudaily.util;
 import android.util.Log;
 
 /**Log工具，debug时将LEVEL设置成VERBOSE，正式发布时将LEVEL设置成NOTHING
- * Created by Kevin on 2015/8/7.
  */
 public class LogUtils {
 

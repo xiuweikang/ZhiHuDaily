@@ -11,9 +11,7 @@ import com.sdust.zhihudaily.data.model.Story;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Kevin on 2015/8/11.
- */
+
 public class CollectedAdapter extends RecyclerView.Adapter {
 
     private List<Story> mStories  = new ArrayList<Story>();

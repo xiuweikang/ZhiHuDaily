@@ -165,44 +165,15 @@ public class CacheRepositoryImp implements CacheRepository {
     }
 
     @Override
-    public void getLongComment(String url, Callback<Comments> callback) {
-
+    public void getComment(String url, Callback<Comments> callback) {
+        getDataObject(url,Comments.class,callback);
     }
 
     @Override
-    public void saveLongCommnet(Comments comment, String url) {
-
+    public void saveCommnet(Comments comment, String url) {
+        saveCacheToDB(comment,url);
     }
 
-    @Override
-    public void getShortComment(String url, Callback<Comments> callback) {
-
-    }
-
-    @Override
-    public void saveShortCommnet(Comments comment, String url) {
-
-    }
-
-    @Override
-    public void getLongCommentBefore(String url, Callback<Comments> callback) {
-
-    }
-
-    @Override
-    public void saveLongCommnetBefore(Comments comment, String url) {
-
-    }
-
-    @Override
-    public void getShortCommentBefore(String url, Callback<Comments> callback) {
-
-    }
-
-    @Override
-    public void saveShortCommnetBefore(Comments comment, String url) {
-
-    }
 
     @Override
     public boolean isCollected(String storyId) {

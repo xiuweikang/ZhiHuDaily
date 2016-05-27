@@ -19,7 +19,7 @@ import com.sdust.zhihudaily.data.model.Story;
 import com.sdust.zhihudaily.util.IntentUtils;
 
 /**
- * Created by Kevin on 2015/8/9.
+ * Created by Kevin on 2016/5/23.
  */
 public class StoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     private CardView card;

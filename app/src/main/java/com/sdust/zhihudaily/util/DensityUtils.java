@@ -2,9 +2,7 @@ package com.sdust.zhihudaily.util;
 
 import android.content.Context;
 
-/**
- * Created by Kevin on 2015/8/10.
- */
+
 public class DensityUtils {
 
     /**

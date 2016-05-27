@@ -150,7 +150,18 @@ public class NetRepositoryImp implements NetRepository {
     }
 
     @Override
-    public void getLongComment(String storyId, Callback<Comments> callback) {
+    public void getLongComment(String storyId, final Callback<Comments> callback) {
+        ZhiHuApi.createApi().getLongComment(storyId, new retrofit.Callback<Comments>() {
+            @Override
+            public void success(Comments comments, Response response) {
+                callback.success(comments,response.getUrl());
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                callback.failure(error,error.getUrl());
+            }
+        });
 
     }
 

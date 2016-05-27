@@ -22,9 +22,6 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-/**
- * Created by Kevin on 2015/8/11.
- */
 public class CollectedFragment extends Fragment implements CollectedContract.View{
 
     private CollectedAdapter mAdapter;

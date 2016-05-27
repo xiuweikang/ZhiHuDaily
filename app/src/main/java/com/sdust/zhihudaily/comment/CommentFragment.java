@@ -17,9 +17,6 @@ import com.sdust.zhihudaily.widget.LoadMoreRecyclerView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-/**
- * Created by Kevin on 16/5/26.
- */
 public class CommentFragment extends Fragment implements CommentContract.View {
 
 

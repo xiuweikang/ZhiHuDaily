@@ -6,9 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created by Kevin on 2015/8/9.
- */
+
 public class DateUtils {
 
     public static String getDate(Date date,String format) {

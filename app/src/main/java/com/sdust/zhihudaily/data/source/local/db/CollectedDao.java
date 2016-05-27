@@ -9,9 +9,6 @@ import com.sdust.zhihudaily.data.model.Story;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Kevin on 2015/8/11.
- */
 public class CollectedDao {
     public static final String TABLE_NAME = "collect";
     private DBOpenHelper mHelper;

@@ -5,9 +5,7 @@ import android.os.Bundle;
 import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.base.BaseAppCompatActivity;
 
-/**
- * Created by Kevin on 2015/8/10.
- */
+
 public class CollectedActivity extends BaseAppCompatActivity {
 
     private static final String TAG = CollectedActivity.class.getSimpleName();

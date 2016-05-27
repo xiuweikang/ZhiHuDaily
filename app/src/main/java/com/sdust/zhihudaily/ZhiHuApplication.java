@@ -11,7 +11,6 @@ import com.sdust.zhihudaily.data.source.RepositoryImp;
 import com.sdust.zhihudaily.data.source.Repository;
 
 /**
- * Created by Kevin on 2015/7/5.
  * 覆写的Application
  */
 public class ZhiHuApplication extends Application{

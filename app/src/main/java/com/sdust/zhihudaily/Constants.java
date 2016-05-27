@@ -1,9 +1,7 @@
 
 package com.sdust.zhihudaily;
 
-/**
- * Created by Kevin on 2015/7/5.
- */
+
 public class Constants {
 
 

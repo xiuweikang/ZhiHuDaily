@@ -12,9 +12,7 @@ import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.collected.CollectedActivity;
 import com.sdust.zhihudaily.setting.SettingsActivity;
 
-/**
- * Created by Kevin on 2015/7/15.
- */
+
 public abstract class BaseAppCompatActivity extends AppCompatActivity {
     public Toolbar mActionBarToolbar;
 

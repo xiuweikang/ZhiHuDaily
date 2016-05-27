@@ -8,9 +8,7 @@ import android.widget.TextView;
 import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.util.DateUtils;
 
-/**
- * Created by Kevin on 2015/8/9.
- */
+
 public class DateViewHolder extends RecyclerView.ViewHolder {
     private TextView mTvDate;
     public DateViewHolder(View itemView) {

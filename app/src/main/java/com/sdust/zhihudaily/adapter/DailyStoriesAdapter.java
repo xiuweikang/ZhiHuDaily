@@ -15,9 +15,7 @@ import com.sdust.zhihudaily.data.model.Story;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Kevin on 2015/8/7.
- */
+
 public class DailyStoriesAdapter extends RecyclerView.Adapter {
     public static final String TAG = DailyStoriesAdapter.class.getSimpleName();
     protected List<Item> mItems;

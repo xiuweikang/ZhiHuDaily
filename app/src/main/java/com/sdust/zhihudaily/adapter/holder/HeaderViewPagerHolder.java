@@ -19,7 +19,6 @@ import java.util.List;
 /**
  * 实现Header的viewHolder
  * 同时实现一个HeaderPagerAdapter
- * Created by Kevin on 2015/8/8.
  */
 public class HeaderViewPagerHolder extends RecyclerView.ViewHolder {
     public static final String TAG = HeaderViewPagerHolder.class.getSimpleName();

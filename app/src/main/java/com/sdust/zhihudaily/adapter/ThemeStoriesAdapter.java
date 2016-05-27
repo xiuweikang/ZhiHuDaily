@@ -18,9 +18,7 @@ import com.sdust.zhihudaily.widget.StoryHeaderView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Kevin on 2015/8/9.
- */
+
 public class ThemeStoriesAdapter extends RecyclerView.Adapter {
 
     public static final class Type {
