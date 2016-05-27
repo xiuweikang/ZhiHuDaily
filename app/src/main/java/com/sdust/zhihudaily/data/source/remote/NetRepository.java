@@ -1,6 +1,7 @@
 
 package com.sdust.zhihudaily.data.source.remote;
 
+import com.sdust.zhihudaily.data.model.Comments;
 import com.sdust.zhihudaily.data.model.DailyStories;
 import com.sdust.zhihudaily.data.model.StartImage;
 import com.sdust.zhihudaily.data.model.Story;
@@ -25,6 +26,14 @@ public interface NetRepository {
 	void getStoryDetail(String storyId, Callback<Story> callback);
 
 	void getStroyExtra(String storyId, Callback<StoryExtra> callback);
+
+	void getLongComment(String storyId,Callback<Comments> callback);
+
+	void getShortComment(String storyId,Callback<Comments> callback);
+
+	void getLongCommentBefore(String storyId,String id,Callback<Comments> callback);
+
+	void getShortCommentBefore(String storyId,String id,Callback<Comments> callback);
 
 
 

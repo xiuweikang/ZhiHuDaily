@@ -191,7 +191,7 @@ public class StoryFragment extends Fragment implements StoryContract.View {
         commentMenu.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CommentActivity.showCommentActivity(getActivity(), mStoryId, mCommentNum);
+                CommentActivity.showCommentActivity(getActivity(), mStoryId, mLongCommentNum,mShortCommentNum);
             }
         });
         mMenu = menu;
@@ -396,13 +396,14 @@ public class StoryFragment extends Fragment implements StoryContract.View {
     public void showStoryExtraError() {
     }
 
-    private String mCommentNum = "";
+    private int mLongCommentNum = 0;
+    private int mShortCommentNum = 0;
 
     private void updateMenu(StoryExtra storyExtra) {
-        String commentNum = storyExtra.getLongComment() + storyExtra.getShortComment() + "";
-        mCommentNum = commentNum;
+        mLongCommentNum = storyExtra.getLongComment();
+        mShortCommentNum = storyExtra.getShortComment();
         TextView commentTxt = (TextView) mMenu.findItem(R.id.action_comment).getActionView().findViewById(R.id.value);
-        commentTxt.setText(commentNum);
+        commentTxt.setText(mLongCommentNum + mShortCommentNum);
         TextView praiseTxt = (TextView) mMenu.findItem(R.id.action_praise).getActionView().findViewById(R.id.value);
         praiseTxt.setText(storyExtra.getPopularity() + "");
     }

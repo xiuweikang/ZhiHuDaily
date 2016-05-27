@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
+import com.sdust.zhihudaily.data.model.Comments;
 import com.sdust.zhihudaily.data.model.StoryExtra;
 import com.sdust.zhihudaily.data.source.local.db.CacheDao;
 import com.sdust.zhihudaily.data.model.Cache;
@@ -160,6 +161,46 @@ public class CacheRepositoryImp implements CacheRepository {
     @Override
     public void saveStoryExtra(StoryExtra story, String url) {
         saveCacheToDB(story,url);
+
+    }
+
+    @Override
+    public void getLongComment(String url, Callback<Comments> callback) {
+
+    }
+
+    @Override
+    public void saveLongCommnet(Comments comment, String url) {
+
+    }
+
+    @Override
+    public void getShortComment(String url, Callback<Comments> callback) {
+
+    }
+
+    @Override
+    public void saveShortCommnet(Comments comment, String url) {
+
+    }
+
+    @Override
+    public void getLongCommentBefore(String url, Callback<Comments> callback) {
+
+    }
+
+    @Override
+    public void saveLongCommnetBefore(Comments comment, String url) {
+
+    }
+
+    @Override
+    public void getShortCommentBefore(String url, Callback<Comments> callback) {
+
+    }
+
+    @Override
+    public void saveShortCommnetBefore(Comments comment, String url) {
 
     }
 

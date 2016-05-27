@@ -2,6 +2,7 @@
 package com.sdust.zhihudaily.data.source.local;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.sdust.zhihudaily.data.model.Comments;
 import com.sdust.zhihudaily.data.model.DailyStories;
 import com.sdust.zhihudaily.data.model.StartImage;
 import com.sdust.zhihudaily.data.model.Story;
@@ -38,6 +39,18 @@ public interface CacheRepository {
 
 	void getStroyExtra(String url, Callback<StoryExtra> callback);
 	void saveStoryExtra(StoryExtra story,String url);
+
+	void getLongComment(String url,Callback<Comments> callback);
+	void saveLongCommnet(Comments comment,String url);
+
+	void getShortComment(String url,Callback<Comments> callback);
+	void saveShortCommnet(Comments comment,String url);
+
+	void getLongCommentBefore(String url,Callback<Comments> callback);
+	void saveLongCommnetBefore(Comments comment,String url);
+
+	void getShortCommentBefore(String url,Callback<Comments> callback);
+	void saveShortCommnetBefore(Comments comment,String url);
 
 	boolean isCollected(String storyId);
 	void saveStory(Story story);

@@ -15,4 +15,10 @@ public class CommentPresenter implements CommentContract.Presenter {
     public void start() {
 
     }
+
+
+    @Override
+    public void refresh(String storyId) {
+
+    }
 }

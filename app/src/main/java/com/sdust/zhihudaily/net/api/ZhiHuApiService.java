@@ -1,6 +1,7 @@
 package com.sdust.zhihudaily.net.api;
 
 
+import com.sdust.zhihudaily.data.model.Comments;
 import com.sdust.zhihudaily.data.model.DailyStories;
 import com.sdust.zhihudaily.data.model.StartImage;
 import com.sdust.zhihudaily.data.model.Story;
@@ -38,4 +39,17 @@ public interface ZhiHuApiService {
 
     @GET("/story-extra/{storyId}")
     void getStoryExtra(@Path("storyId") String storyId,Callback<StoryExtra> callback);
+
+    @GET("/story/{storyId}/long-comments")
+    void getLongComment(@Path("storyId") String storyId, Callback<Comments> callback);
+
+    @GET("/story/{storyId}/long-comments/before/{id}")
+    void getLongCommentBefore(@Path("storyId") String storyId, @Path("id") String id, Callback<Comments> callback);
+
+    @GET("/story/{storyId}/short-comments")
+    void getShortComment(@Path("storyId") String storyId, Callback<Comments> callback);
+
+    @GET("/story/{storyId}/short-comments/before/{id}")
+    void getShortCommentBefore(@Path("storyId") String storyId, @Path("id") String id, Callback<Comments> callback);
+
 }

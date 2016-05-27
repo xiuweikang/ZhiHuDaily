@@ -4,6 +4,7 @@ package com.sdust.zhihudaily.data.source;
 import android.content.Context;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.sdust.zhihudaily.data.model.Comments;
 import com.sdust.zhihudaily.data.model.DailyStories;
 import com.sdust.zhihudaily.data.model.StartImage;
 import com.sdust.zhihudaily.data.model.Story;
@@ -245,6 +246,26 @@ public class RepositoryImp implements Repository {
                 });
             }
         });
+    }
+
+    @Override
+    public void getLongComment(String storyId, Callback<Comments> callback) {
+
+    }
+
+    @Override
+    public void getShortComment(String storyId, Callback<Comments> callback) {
+
+    }
+
+    @Override
+    public void getLongCommentBefore(String storyId, String id, Callback<Comments> callback) {
+
+    }
+
+    @Override
+    public void getShortCommentBefore(String storyId, String id, Callback<Comments> callback) {
+
     }
 
     @Override

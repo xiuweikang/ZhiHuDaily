@@ -1,5 +1,6 @@
 package com.sdust.zhihudaily.data.source.remote;
 
+import com.sdust.zhihudaily.data.model.Comments;
 import com.sdust.zhihudaily.data.model.StoryExtra;
 import com.sdust.zhihudaily.net.api.ZhiHuApi;
 import com.sdust.zhihudaily.data.model.DailyStories;
@@ -146,6 +147,26 @@ public class NetRepositoryImp implements NetRepository {
                 callback.failure(error,error.getUrl());
             }
         });
+    }
+
+    @Override
+    public void getLongComment(String storyId, Callback<Comments> callback) {
+
+    }
+
+    @Override
+    public void getShortComment(String storyId, Callback<Comments> callback) {
+
+    }
+
+    @Override
+    public void getLongCommentBefore(String storyId, String id, Callback<Comments> callback) {
+
+    }
+
+    @Override
+    public void getShortCommentBefore(String storyId, String id, Callback<Comments> callback) {
+
     }
 
 

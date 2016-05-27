@@ -9,9 +9,11 @@ import com.sdust.zhihudaily.base.BaseView;
 public interface CommentContract {
 
     interface Presenter extends BasePresenter {
+        void refresh(String storyId);
 
     }
     interface View extends BaseView<Presenter>{
-
+        void showProgress();
+        void hideProgress();
     }
 }
