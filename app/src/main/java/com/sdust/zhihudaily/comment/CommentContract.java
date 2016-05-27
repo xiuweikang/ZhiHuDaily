@@ -18,6 +18,8 @@ public interface CommentContract {
         void showLongComment(Comments commnet);
         void showLongCommentError();
         void showShortComment(Comments comment);
+        void showLongProgress();
+        void showShortCommentError();
         void showProgress();
         void hideProgress();
     }

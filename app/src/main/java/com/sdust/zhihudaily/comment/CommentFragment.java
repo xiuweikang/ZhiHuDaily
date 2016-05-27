@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +66,8 @@ public class CommentFragment extends Fragment implements CommentContract.View {
     private CommentAdapter mLongCommentAdapter;
     private CommentAdapter mShortCommentAdapter;
 
+    private boolean isShortCommentLoad;
+    private boolean isShorCommentFold;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -109,6 +112,48 @@ public class CommentFragment extends Fragment implements CommentContract.View {
         mShortCommentAdapter = new CommentAdapter();
         mRecyclerViewLong.setAdapter(mLongCommentAdapter);
         mRecyclerViewShort.setAdapter(mShortCommentAdapter);
+        isShortCommentLoad = false;
+        if (mShortCommentNum == 0) {
+            mLayoutFold.setOnClickListener(null);
+        } else {
+            mLayoutFold.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!isShortCommentLoad) {
+                        mPresenter.getShortComment(mStoryId);
+                    } else {
+                        mImgFold.setSelected(isShorCommentFold);
+                        mRecyclerViewShort.setVisibility(isShorCommentFold ? View.VISIBLE : View.GONE);
+                        isShorCommentFold = !isShorCommentFold;
+                    }
+                }
+            });
+        }
+
+        mRecyclerViewLong.setOnLoadMoreListener(new LoadMoreRecyclerView.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+
+            }
+        });
+        mRecyclerViewShort.setOnLoadMoreListener(new LoadMoreRecyclerView.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+
+            }
+        });
+
+
     }
 
     @Override
@@ -147,11 +192,37 @@ public class CommentFragment extends Fragment implements CommentContract.View {
     }
 
     @Override
-    public void showProgress() {
+    public void showShortComment(Comments comment) {
+        if (comment == null || comment.getCommentList().size() == 0) {
+            return;
+        }
+        List<Comment> commentList = comment.getCommentList();
+        mShortCommentAdapter.setCommentList(commentList);
+        mRecyclerViewShort.setVisibility(View.VISIBLE);
+        isShorCommentFold = false;
+        isShortCommentLoad = true;
+        mImgFold.setSelected(true);
+
+    }
+
+    @Override
+    public void showLongProgress() {
         mRecyclerViewLong.setVisibility(View.GONE);
         mLayoutEmpty.setVisibility(View.VISIBLE);
         mPb.setVisibility(View.VISIBLE);
 
+    }
+
+    @Override
+    public void showShortCommentError() {
+        isShorCommentFold = true;
+        isShortCommentLoad = false;
+        mImgFold.setSelected(false);
+    }
+
+    @Override
+    public void showProgress() {
+        mPb.setVisibility(View.VISIBLE);
     }
 
     @Override

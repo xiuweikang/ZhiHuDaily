@@ -25,7 +25,7 @@ public class CommentPresenter implements CommentContract.Presenter {
 
     @Override
     public void getLongCommnet(String storyId) {
-        mView.showProgress();
+        mView.showLongProgress();
         ZhiHuApplication.getRepository().getLongComment(storyId, new Repository.Callback<Comments>() {
             @Override
             public void success(Comments comments, boolean outDate) {
@@ -37,6 +37,25 @@ public class CommentPresenter implements CommentContract.Presenter {
             public void failure(Exception e) {
                 mView.showLongCommentError();
                 mView.hideProgress();
+            }
+        });
+    }
+
+    @Override
+    public void getShortComment(String storyId) {
+        mView.showProgress();
+        ZhiHuApplication.getRepository().getShortComment(storyId, new Repository.Callback<Comments>() {
+            @Override
+            public void success(Comments comments, boolean outDate) {
+                mView.showShortComment(comments);
+                mView.hideProgress();
+            }
+
+            @Override
+            public void failure(Exception e) {
+                mView.hideProgress();
+                mView.showLongCommentError();
+                e.printStackTrace();
             }
         });
     }
