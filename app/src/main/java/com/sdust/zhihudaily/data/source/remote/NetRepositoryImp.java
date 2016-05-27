@@ -181,13 +181,33 @@ public class NetRepositoryImp implements NetRepository {
     }
 
     @Override
-    public void getLongCommentBefore(String storyId, String id, Callback<Comments> callback) {
+    public void getLongCommentBefore(String storyId, String id, final Callback<Comments> callback) {
+        ZhiHuApi.createApi().getLongCommentBefore(storyId,id,new retrofit.Callback<Comments>(){
+            @Override
+            public void success(Comments comments, Response response) {
+                callback.success(comments,response.getUrl());
+            }
 
+            @Override
+            public void failure(RetrofitError error) {
+                callback.failure(error,error.getUrl());
+            }
+        });
     }
 
     @Override
-    public void getShortCommentBefore(String storyId, String id, Callback<Comments> callback) {
+    public void getShortCommentBefore(String storyId, String id, final Callback<Comments> callback) {
+        ZhiHuApi.createApi().getShortCommentBefore(storyId,id,new retrofit.Callback<Comments>(){
+            @Override
+            public void success(Comments comments, Response response) {
+                callback.success(comments,response.getUrl());
+            }
 
+            @Override
+            public void failure(RetrofitError error) {
+                callback.failure(error,error.getUrl());
+            }
+        });
     }
 
 

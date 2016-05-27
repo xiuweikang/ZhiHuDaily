@@ -45,7 +45,17 @@ public class CommentAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    public void appendCommentList() {
+    public void appendCommentList(List<Comment> commentList) {
+        int start = mCommentList.size();
+        mCommentList.addAll(commentList);
+        int end = mCommentList.size();
+        notifyItemRangeChanged(start,end);
+    }
 
+    public String getBeforeId() {
+        if(mCommentList != null && mCommentList.size() > 0) {
+            return mCommentList.get(mCommentList.size() - 1).getId();
+        }
+        return "";
     }
 }

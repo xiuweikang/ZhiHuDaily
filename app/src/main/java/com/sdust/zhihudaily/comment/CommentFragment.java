@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.adapter.CommentAdapter;
@@ -44,6 +45,8 @@ public class CommentFragment extends Fragment implements CommentContract.View {
     @InjectView(R.id.layout_fold)
     LinearLayout mLayoutFold;
     private CommentContract.Presenter mPresenter;
+    private String mLongBeforeId = "";
+    private String mShortBeforeId = "";
 
     private static final String STORY_ID = "story_id";
     private static final String SHORT_COMMENT_NUM = "short_comment_num";
@@ -130,10 +133,14 @@ public class CommentFragment extends Fragment implements CommentContract.View {
             });
         }
 
+        // TODO: 16/5/27 Scrollview嵌套RecyclerView时存在问题，上拉刷新失效
         mRecyclerViewLong.setOnLoadMoreListener(new LoadMoreRecyclerView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-
+                if (!mLongBeforeId.equals(mLongCommentAdapter.getBeforeId())) {
+                    mLongBeforeId = mLongCommentAdapter.getBeforeId();
+                    mPresenter.getLongCommentBefore(mStoryId, mLongBeforeId);
+                }
             }
 
             @Override
@@ -144,7 +151,10 @@ public class CommentFragment extends Fragment implements CommentContract.View {
         mRecyclerViewShort.setOnLoadMoreListener(new LoadMoreRecyclerView.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-
+                if (!mShortBeforeId.equals(mShortCommentAdapter.getBeforeId())) {
+                    mShortBeforeId = mShortCommentAdapter.getBeforeId();
+                    mPresenter.getShortCommentBefore(mStoryId, mShortBeforeId);
+                }
             }
 
             @Override
@@ -184,6 +194,21 @@ public class CommentFragment extends Fragment implements CommentContract.View {
         mRecyclerViewLong.setVisibility(View.VISIBLE);
         mLayoutEmpty.setVisibility(View.GONE);
 
+    }
+
+    @Override
+    public void showLongCommentMore(Comments comment) {
+        mLongCommentAdapter.appendCommentList(comment.getCommentList());
+    }
+
+    @Override
+    public void showShortCommentMore(Comments comments) {
+        mShortCommentAdapter.appendCommentList(comments.getCommentList());
+    }
+
+    @Override
+    public void showError() {
+        Toast.makeText(getActivity(), "加载失败", Toast.LENGTH_SHORT).show();
     }
 
     @Override

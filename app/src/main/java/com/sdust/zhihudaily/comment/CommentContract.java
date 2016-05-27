@@ -12,10 +12,15 @@ public interface CommentContract {
     interface Presenter extends BasePresenter {
         void getLongCommnet(String storyId);
         void getShortComment(String storyId);
+        void getLongCommentBefore(String storyId,String id);
+        void getShortCommentBefore(String storyId,String id);
 
     }
     interface View extends BaseView<Presenter>{
         void showLongComment(Comments commnet);
+        void showLongCommentMore(Comments comment);
+        void showShortCommentMore(Comments comments);
+        void showError();
         void showLongCommentError();
         void showShortComment(Comments comment);
         void showLongProgress();

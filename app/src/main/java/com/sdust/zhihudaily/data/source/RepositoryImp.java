@@ -299,13 +299,53 @@ public class RepositoryImp implements Repository {
     }
 
     @Override
-    public void getLongCommentBefore(String storyId, String id, Callback<Comments> callback) {
+    public void getLongCommentBefore(String storyId, String id, final Callback<Comments> callback) {
+        mNetReImp.getLongCommentBefore(storyId,id, new NetRepository.Callback<Comments>() {
+            @Override
+            public void success(Comments comment, String url) {
+                callback.success(comment, false);
+                mCacheReImp.saveCommnet(comment, url);
+            }
 
+            @Override
+            public void failure(Exception e, String url) {
+                mCacheReImp.getComment(url, new CacheRepository.Callback<Comments>() {
+                    @Override
+                    public void success(Comments comments) {
+                        callback.success(comments, true);
+                    }
+                    @Override
+                    public void failure(Exception e) {
+                        callback.failure(e);
+                    }
+                });
+            }
+        });
     }
 
     @Override
-    public void getShortCommentBefore(String storyId, String id, Callback<Comments> callback) {
+    public void getShortCommentBefore(String storyId, String id,final Callback<Comments> callback) {
+        mNetReImp.getShortCommentBefore(storyId,id, new NetRepository.Callback<Comments>() {
+            @Override
+            public void success(Comments comment, String url) {
+                callback.success(comment, false);
+                mCacheReImp.saveCommnet(comment, url);
+            }
 
+            @Override
+            public void failure(Exception e, String url) {
+                mCacheReImp.getComment(url, new CacheRepository.Callback<Comments>() {
+                    @Override
+                    public void success(Comments comments) {
+                        callback.success(comments, true);
+                    }
+                    @Override
+                    public void failure(Exception e) {
+                        callback.failure(e);
+                    }
+                });
+            }
+        });
     }
 
     @Override
