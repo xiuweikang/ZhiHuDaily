@@ -1,9 +1,12 @@
 
 package com.sdust.zhihudaily.util;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
+
+import com.sdust.zhihudaily.R;
+import com.sdust.zhihudaily.ZhiHuApplication;
 
 
 public class SharedPrefUtils {
@@ -12,30 +15,34 @@ public class SharedPrefUtils {
 
 	private static final String SHARED_PREF_NIGHT_MODE = "pref_night";
 
-	public static SharedPreferences getDefaultSharedPreferences(Context context) {
-		return PreferenceManager.getDefaultSharedPreferences(context);
+	public static SharedPreferences getDefaultSharedPreferences() {
+		return PreferenceManager.getDefaultSharedPreferences(ZhiHuApplication.getContext());
 	}
 
-	public static boolean getIsNiaghtMode(Context context) {
-		SharedPreferences sp = getDefaultSharedPreferences(context);
+	public static boolean getIsNiaghtMode() {
+		SharedPreferences sp = getDefaultSharedPreferences();
 		return sp.getBoolean(SHARED_PREF_NIGHT_MODE,false);
 	}
 
-	public static void setNightMode(Context context,boolean isNight) {
-		SharedPreferences sp = getDefaultSharedPreferences(context);
+	public static void setNightMode(boolean isNight) {
+		SharedPreferences sp = getDefaultSharedPreferences();
 		sp.edit().putBoolean(SHARED_PREF_NIGHT_MODE,isNight).commit();
 	}
-	 public static String getStartJson(Context context){
-	        SharedPreferences sp = getDefaultSharedPreferences(context);
+	 public static String getStartJson(){
+	        SharedPreferences sp = getDefaultSharedPreferences();
 	        return sp.getString(SHARED_PREF_START_JSON, null);
 	 }
 	 
 	 
-	 public static void setStartJson(Context context,String value) {
-		 SharedPreferences sp = getDefaultSharedPreferences(context);
+	 public static void setStartJson(String value) {
+		 SharedPreferences sp = getDefaultSharedPreferences();
 		 sp.edit().putString(SHARED_PREF_START_JSON, value).commit();
 	 }
 
+	public static int getTheme() {
+		Log.d("theme",getIsNiaghtMode()?"night" : "day");
+		return getIsNiaghtMode() ? R.style.NightTheme : R.style.DayTheme;
+	}
 
 
 }

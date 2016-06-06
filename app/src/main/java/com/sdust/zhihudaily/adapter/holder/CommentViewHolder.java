@@ -77,7 +77,8 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements TextFo
         if (comment.getReply() != null) {
             String replyContent = "//" + comment.getReply().getAuthor() + ": " + comment.getReply().getCotent();
             SpannableString span = new SpannableString(replyContent);
-            span.setSpan(new TextAppearanceSpan(mView.getContext(), R.style.TextViewBase_Main), 0, comment.getReply().getAuthor().length() + 3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            int length =  (comment.getReply().getAuthor() == null ? 0 : comment.getReply().getAuthor().length()) + 3;
+            span.setSpan(new TextAppearanceSpan(mView.getContext(), R.style.TextViewBase_Main), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             mFoldHelper.setText(span, true);
         } else {
             mFoldHelper.setText("", true);

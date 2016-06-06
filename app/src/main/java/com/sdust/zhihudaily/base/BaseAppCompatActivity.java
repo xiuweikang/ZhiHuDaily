@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.collected.CollectedActivity;
 import com.sdust.zhihudaily.setting.SettingsActivity;
+import com.sdust.zhihudaily.util.SharedPrefUtils;
 
 
 public abstract class BaseAppCompatActivity extends AppCompatActivity {
@@ -25,6 +26,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(SharedPrefUtils.getTheme());
         setContentView(getContentViewLayoutId());
         mActionBarToolbar = (Toolbar) findViewById(R.id.actionbarToolbar);
         setupActionBar();

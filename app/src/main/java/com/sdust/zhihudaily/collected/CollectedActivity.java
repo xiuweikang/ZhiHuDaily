@@ -24,6 +24,8 @@ public class CollectedActivity extends BaseAppCompatActivity {
                     .add(R.id.container, fragment, TAG)
                     .commit();
             new CollectedPresenter(fragment);
+
         }
+        setTheme(R.style.DayTheme);
     }
 }

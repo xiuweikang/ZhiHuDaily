@@ -48,7 +48,7 @@ public class CacheRepositoryImp implements CacheRepository {
 
     @Override
     public void getStartImage(Callback<StartImage> callback) {
-        String startOldJsonStr = SharedPrefUtils.getStartJson(mContext);
+        String startOldJsonStr = SharedPrefUtils.getStartJson();
         if (!TextUtils.isEmpty(startOldJsonStr)) {
             StartImage startImage = new Gson().fromJson(startOldJsonStr,
                     StartImage.class);
@@ -61,12 +61,11 @@ public class CacheRepositoryImp implements CacheRepository {
     @Override
     public void saveStartImage(int width, int height,
                                DisplayImageOptions options, StartImage startImage) {
-        String oldJsonStr = SharedPrefUtils.getStartJson(mContext);
+        String oldJsonStr = SharedPrefUtils.getStartJson();
         StartImage old = new Gson().fromJson(oldJsonStr, StartImage.class);
 
         if (old == null || !startImage.getImg().equals(old.getImg())) {
-            SharedPrefUtils.setStartJson(mContext,
-                    new Gson().toJson(startImage));
+            SharedPrefUtils.setStartJson(new Gson().toJson(startImage));
             ImageLoader.getInstance().loadImage(startImage.getImg(),
                     new ImageSize(width, height), options, null);
         }

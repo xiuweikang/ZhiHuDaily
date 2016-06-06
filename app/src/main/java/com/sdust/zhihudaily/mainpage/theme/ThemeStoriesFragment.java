@@ -84,6 +84,12 @@ public class ThemeStoriesFragment extends BaseFragment implements ThemeContract.
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mThemeId = getThemeId();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         mSwipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -93,11 +99,6 @@ public class ThemeStoriesFragment extends BaseFragment implements ThemeContract.
                 }
             }
         });
-    }
-
-    private void loadMore() {
-
-
     }
 
     @Override

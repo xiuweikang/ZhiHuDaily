@@ -1,22 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="AppTheme.Base"></style>
 
     <!-- Base application theme. -->
-    <style name="AppTheme.Base" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-        <item name="colorPrimary">@color/style_color_primary</item>
-        <item name="colorPrimaryDark">@color/style_color_primary_dark</item>
-        <item name="colorAccent">@color/style_color_accent</item>
-        <item name="android:windowBackground">@color/style_window_background</item>
         <item name="android:divider">@color/style_divider</item>
-        <item name="android:textColorPrimary">@color/style_text_color_primary</item>
-        <item name="android:textColorSecondary">@color/style_text_color_secondary</item>
 
     </style>
 
+    <style name="DayTheme" parent="AppTheme">
+        <item name="android:windowBackground">@color/style_day_window_background</item>
+        <item name="android:textColorSecondary">@color/style_day_text_color_secondary</item>
+        <item name="colorPrimary">@color/style_day_color_primary</item>
+        <item name="colorAccent">@color/style_day_color_accent</item>
+        <item name="android:textColorPrimary">@color/style_day_text_color_primary</item>
+        <item name="colorPrimaryDark">@color/style_day_color_primary_dark</item>
+
+    </style>
+    <style name="NightTheme" parent="AppTheme">
+        <item name="android:windowBackground">@color/style_night_window_background</item>
+        <item name="android:textColorSecondary">@color/style_night_text_color_secondary</item>
+        <item name="colorPrimary">@color/style_night_color_primary</item>
+        <item name="colorAccent">@color/style_night_color_accent</item>
+        <item name="android:textColorPrimary">@color/style_night_text_color_primary</item>
+        <item name="colorPrimaryDark">@color/style_night_color_primary_dark</item>
+
+    </style>
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
         <item name="color">@android:color/white</item>

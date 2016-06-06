@@ -126,7 +126,7 @@ public class StoryFragment extends Fragment implements StoryContract.View {
         if (getArguments() != null) {
             mStoryId = getArguments().getString(IntentUtils.EXTRA_STORY_ID);
         }
-        isNight = SharedPrefUtils.getIsNiaghtMode(getActivity());
+        isNight = SharedPrefUtils.getIsNiaghtMode();
         mBackFromSetting = false;
         mScrollPullDownHelper = new ScrollPullDownHelper();
         this.mOptions = new DisplayImageOptions.Builder()
@@ -160,9 +160,8 @@ public class StoryFragment extends Fragment implements StoryContract.View {
     public void onResume() {
         super.onResume();
         mPresenter.refresh(mStoryId);
-        mPresenter.getStoryExtra(mStoryId);
 
-        if (mBackFromSetting && isNight != SharedPrefUtils.getIsNiaghtMode(getActivity())) {
+        if (mBackFromSetting && isNight != SharedPrefUtils.getIsNiaghtMode()) {
             isNight = !isNight;
             bindWebView(mHasImage);
         }
@@ -182,6 +181,7 @@ public class StoryFragment extends Fragment implements StoryContract.View {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_story, menu);
         mMenu = menu;
+        mPresenter.getStoryExtra(mStoryId);
         MenuItem collectedMenu = menu.findItem(R.id.action_collect);
         isCollected = mPresenter.isCollected(mStoryId);
         if (isCollected) {
@@ -400,9 +400,6 @@ public class StoryFragment extends Fragment implements StoryContract.View {
     private int mShortCommentNum = 0;
 
     private void updateMenu(StoryExtra storyExtra) {
-        if(mMenu == null) {
-            return;
-        }
         mLongCommentNum = storyExtra.getLongComment();
         mShortCommentNum = storyExtra.getShortComment();
         TextView commentTxt = (TextView) mMenu.findItem(R.id.action_comment).getActionView().findViewById(R.id.value);

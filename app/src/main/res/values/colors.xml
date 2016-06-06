@@ -5,16 +5,24 @@
     <color name="transparent">#00000000</color>
 
     <!--theme color-->
-    <color name="style_color_primary">#2196F3</color>
-    <color name="style_color_primary_dark">#1976D2</color>
-    <color name="style_color_primary_light">#BBDEFB</color>
-    <color name="style_color_accent">#0c8574</color>
-    <color name="style_text_color_primary">#ffffffff</color>
-    <color name="style_text_color_secondary">#000000</color>
+    <color name="style_day_color_primary">#2196F3</color>
+    <color name="style_day_color_primary_dark">#1976D2</color>
+    <color name="style_day_color_primary_light">#BBDEFB</color>
+    <color name="style_day_color_accent">#0c8574</color>
+    <color name="style_day_text_color_primary">#ffffffff</color>
+    <color name="style_day_text_color_secondary">#000000</color>
     <color name="style_divider">#efefef</color>
-    <color name="style_window_background">#ffffffff</color>
+    <color name="style_day_window_background">#ffffffff</color>
     <color name="style_hint">#bfbfbf</color>
     <color name="style_navigation_bar_color">#000000</color>
+
+    <color name="style_night_window_background">#FF424242</color>
+    <color name="style_night_color_primary">#212121</color>
+    <color name="style_night_color_primary_dark">#DD000000</color>
+    <color name="style_night_color_primary_light">#BBDEFB</color>
+    <color name="style_night_color_accent">#0c8574</color>
+    <color name="style_night_text_color_primary">#ffffffff</color>
+    <color name="style_night_text_color_secondary">#000000</color>
 
     <!--setting theme-->
     <color name="setting_color_accent">#0c8574</color>
@@ -26,9 +34,9 @@
 
     <color name="navdrawer_background">#ffffffff</color>
     <color name="navdrawer_text_color">@color/black</color>
-    <color name="navdrawer_text_color_selected">@color/style_color_primary</color>
+    <color name="navdrawer_text_color_selected">@color/style_day_color_primary</color>
     <color name="navdrawer_icon_tint">#888</color>
-    <color name="navdrawer_icon_tint_selected">@color/style_color_primary</color>
+    <color name="navdrawer_icon_tint_selected">@color/style_day_color_primary</color>
 
 
 </resources>

@@ -7,8 +7,9 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.sdust.zhihudaily.data.source.RepositoryImp;
 import com.sdust.zhihudaily.data.source.Repository;
+import com.sdust.zhihudaily.data.source.RepositoryImp;
+import com.squareup.leakcanary.LeakCanary;
 
 /**
  * 覆写的Application
@@ -23,6 +24,7 @@ public class ZhiHuApplication extends Application{
 		super.onCreate();
 
 		applicationContext = getApplicationContext();
+		LeakCanary.install(this);
 		initImageLoader(getApplicationContext());
 		
 	}

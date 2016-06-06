@@ -21,7 +21,6 @@ import com.sdust.zhihudaily.Constants;
 import com.sdust.zhihudaily.R;
 import com.sdust.zhihudaily.data.source.local.db.CacheDao;
 import com.sdust.zhihudaily.util.FileUtils;
-import com.sdust.zhihudaily.util.LogUtils;
 import com.sdust.zhihudaily.util.SharedPrefUtils;
 
 import butterknife.ButterKnife;
@@ -77,7 +76,7 @@ public class SettingFragment extends Fragment {
                 showDialog(true);
             }
         });
-        boolean isNight = SharedPrefUtils.getIsNiaghtMode(getActivity());
+        boolean isNight = SharedPrefUtils.getIsNiaghtMode();
         if (isNight) {
             mCbkNight.setChecked(true);
         } else {
@@ -88,13 +87,12 @@ public class SettingFragment extends Fragment {
         mCbkNight.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    LogUtils.d("night","设置夜间模式");
-                    SharedPrefUtils.setNightMode(getActivity(), true);
+                if (isChecked) {
+                    SharedPrefUtils.setNightMode(true);
                 } else {
-                    LogUtils.d("night","取消夜间模式");
-                    SharedPrefUtils.setNightMode(getActivity(), false);
+                    SharedPrefUtils.setNightMode(false);
                 }
+                getActivity().setTheme(SharedPrefUtils.getTheme());
             }
         });
     }
