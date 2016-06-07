@@ -14,6 +14,9 @@ import retrofit.http.GET;
 import retrofit.http.Path;
 
 
+/**
+ * 请求接口
+ */
 public interface ZhiHuApiService {
 
     @GET("/start-image/{width}*{height}")

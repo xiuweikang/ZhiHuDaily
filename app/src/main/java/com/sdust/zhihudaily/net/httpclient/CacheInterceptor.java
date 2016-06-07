@@ -9,6 +9,9 @@ import com.squareup.okhttp.Response;
 import java.io.IOException;
 
 
+/**
+ * OkHttp的拦截器
+ */
 public class CacheInterceptor implements Interceptor {
     public static final String TAG = CacheInterceptor.class.getSimpleName();
     private static final String CACHE_CONTROL = "Cache-Control";

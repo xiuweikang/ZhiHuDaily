@@ -10,6 +10,9 @@ import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
 
+/**
+ * 创建请求服务的类
+ */
 public class ZhiHuApi {
 
     private static final String API = "http://news.at.zhihu.com/api/4";
@@ -30,6 +33,9 @@ public class ZhiHuApi {
         return mRetrofit.create(ZhiHuApiService.class);
     }
 
+    /**
+     * 创建请求服务
+     */
     public static ZhiHuApiService createApi() {
         if (dailyApiService == null) {
             synchronized (ZhiHuApi.class) {

@@ -10,6 +10,9 @@ import com.squareup.okhttp.OkHttpClient;
 import java.util.concurrent.TimeUnit;
 
 
+/**
+ * OkHttp的工厂类
+ */
 public class OkHttp {
     private static OkHttpClient okHttpClient;
 
