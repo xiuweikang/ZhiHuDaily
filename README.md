@@ -3,7 +3,7 @@
 
 
 ###介绍
-本项目整体结构基于![google官方推荐的MVP架构](https://github.com/googlesamples/android-architecture),网络请求模块为：Retrofit + okHttp,图片加载为UIL。
+本项目整体结构基于[google官方推荐的MVP架构](https://github.com/googlesamples/android-architecture),网络请求模块为：Retrofit + okHttp,图片加载为UIL。
 
 
 ###预览
